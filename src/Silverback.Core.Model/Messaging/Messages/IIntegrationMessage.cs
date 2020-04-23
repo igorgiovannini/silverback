@@ -1,8 +1,15 @@
 ﻿// Copyright (c) 2020 Sergio Aquilini
 // This code is licensed under MIT license (see LICENSE file for details)
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace Silverback.Messaging.Messages
 {
+    /// <summary>
+    ///     Represents a message sent over the message broker. It is further specialized as
+    ///     <see cref="IIntegrationEvent"/> and <see cref="IIntegrationCommand"/>.
+    /// </summary>
+    [SuppressMessage("ReSharper", "CA1040", Justification = "Intentionally a marker interface")]
     public interface IIntegrationMessage : IMessage
     {
     }

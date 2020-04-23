@@ -5,6 +5,7 @@
     <TargetFramework>$(NetCoreTargetVersion)</TargetFramework>
     <LangVersion>$(LangVersion)</LangVersion>
     <RootNamespace>Silverback.Integration.Kafka.TestConsumer</RootNamespace>
+    <CodeAnalysisRuleSet>..\..\Tests.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup>

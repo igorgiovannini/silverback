@@ -3,6 +3,10 @@
 
 namespace Silverback.Messaging.Messages
 {
+    /// <summary>
+    ///     Represe
+    /// </summary>
+    /// <typeparam name="TResult"></typeparam>
     public interface IQuery<out TResult> : IRequest<TResult>
     {
     }
