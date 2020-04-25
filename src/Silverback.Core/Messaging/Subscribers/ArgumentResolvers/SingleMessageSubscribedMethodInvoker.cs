@@ -5,7 +5,7 @@ using System;
 
 namespace Silverback.Messaging.Subscribers.ArgumentResolvers
 {
-    public class SingleMessageArgumentResolver : ISingleMessageArgumentResolver
+    internal class SingleMessageArgumentResolver : ISingleMessageArgumentResolver
     {
         public bool CanResolve(Type parameterType) => true;
 

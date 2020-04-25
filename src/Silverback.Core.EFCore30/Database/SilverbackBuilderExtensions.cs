@@ -10,17 +10,23 @@ using Silverback.Messaging.Configuration;
 namespace Microsoft.Extensions.DependencyInjection
 {
     /// <summary>
-    ///     Contains the <c>UseDbContext</c> extension for the <see cref="ISilverbackBuilder"/>.
+    ///     Contains the <c>UseDbContext</c> extension for the <see cref="ISilverbackBuilder" />.
     /// </summary>
     public static class SilverbackBuilderExtensions
     {
         /// <summary>
-        ///     Registers the specified <see cref="DbContext"/> to be used as underlying storage for the
+        ///     Registers the specified <see cref="DbContext" /> to be used as underlying storage for the
         ///     services requiring it.
         /// </summary>
-        /// <typeparam name="TDbContext">The type of the <see cref="DbContext" /> to be used.</typeparam>
-        /// <param name="builder">The <see cref="ISilverbackBuilder"/> to add the  <see cref="DbContext"/> to.</param>
-        /// <returns>The <see cref="ISilverbackBuilder"/> so that additional calls can be chained.</returns>
+        /// <typeparam name="TDbContext">
+        ///     The type of the <see cref="DbContext" /> to be used.
+        /// </typeparam>
+        /// <param name="builder">
+        ///     The <see cref="ISilverbackBuilder" /> to add the <see cref="DbContext" /> to.
+        /// </param>
+        /// <returns>
+        ///     The <see cref="ISilverbackBuilder" /> so that additional calls can be chained.
+        /// </returns>
         public static ISilverbackBuilder UseDbContext<TDbContext>(this ISilverbackBuilder builder)
             where TDbContext : DbContext
         {
@@ -29,8 +35,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
             SilverbackQueryableExtensions.Implementation = new EfCoreQueryableExtensions();
 
-            builder.Services
-                .AddScoped<IDbContext>(s => new EfCoreDbContext<TDbContext>(s.GetRequiredService<TDbContext>()));
+            builder.Services.AddScoped<IDbContext>(
+                serviceProvider => new EfCoreDbContext<TDbContext>(serviceProvider.GetRequiredService<TDbContext>()));
 
             return builder;
         }

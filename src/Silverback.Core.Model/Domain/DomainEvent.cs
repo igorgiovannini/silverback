@@ -5,14 +5,17 @@ using Silverback.Messaging.Messages;
 
 namespace Silverback.Domain
 {
+    /// <inheritdoc cref="IDomainEvent{TEntity}"/>
     public abstract class DomainEvent<TEntity> : IDomainEvent<TEntity>
+        where TEntity : class
     {
-        public TEntity Source { get; set; }
+        /// <inheritdoc />
+        public TEntity? Source { get; set; }
 
-        object IMessageWithSource.Source
+        object? IMessageWithSource.Source
         {
             get => Source;
-            set => Source = (TEntity) value;
+            set => Source = (TEntity?)value;
         }
     }
 }

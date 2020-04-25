@@ -110,7 +110,7 @@
         <Rule Id="CA1713" Action="Warning" />
         <Rule Id="CA1714" Action="Warning" />
         <Rule Id="CA1715" Action="Warning" />
-        <Rule Id="CA1716" Action="Warning" />
+        <Rule Id="CA1716" Action="None" /> <!-- IdentifiersShouldNotMatchKeywords: supporting c# is enough and will reactivate it if a real problem arises -->
         <Rule Id="CA1717" Action="Warning" />
         <Rule Id="CA1719" Action="Warning" />
         <Rule Id="CA1720" Action="Warning" />
@@ -711,7 +711,7 @@
         <Rule Id="CA1711" Action="Warning" />
         <Rule Id="CA1714" Action="Warning" />
         <Rule Id="CA1715" Action="Warning" />
-        <Rule Id="CA1716" Action="Warning" />
+        <Rule Id="CA1716" Action="None" /> <!-- IdentifiersShouldNotMatchKeywords: supporting c# is enough and will reactivate it if a real problem arises -->
         <Rule Id="CA1717" Action="Warning" />
         <Rule Id="CA1720" Action="Warning" />
         <Rule Id="CA1721" Action="Warning" />

@@ -6,7 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace Silverback.Messaging.Messages
 {
     /// <summary>
-    ///     Represents a message sent over the message broker. It is further specialized as
+    ///     Represents a message that is sent over the message broker. It is further specialized as
     ///     <see cref="IIntegrationEvent"/> and <see cref="IIntegrationCommand"/>.
     /// </summary>
     [SuppressMessage("ReSharper", "CA1040", Justification = "Intentionally a marker interface")]

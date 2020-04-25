@@ -144,7 +144,7 @@ namespace Silverback.Messaging.Configuration
         /// <param name="distributedLockSettings">
         ///     The settings for the locking mechanism (default settings will be used if not specified).
         /// </param>
-        public IBrokerOptionsBuilder AddOutboundWorker(
+        IBrokerOptionsBuilder AddOutboundWorker(
             TimeSpan? interval = null,
             bool enforceMessageOrder = true,
             int readPackageSize = 100,

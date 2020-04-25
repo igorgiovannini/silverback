@@ -5,7 +5,7 @@ using System;
 
 namespace Silverback.Messaging.Subscribers.ArgumentResolvers
 {
-    public class ServiceProviderAdditionalArgumentResolver : IAdditionalArgumentResolver
+    internal class ServiceProviderAdditionalArgumentResolver : IAdditionalArgumentResolver
     {
         private readonly IServiceProvider _serviceProvider;
 

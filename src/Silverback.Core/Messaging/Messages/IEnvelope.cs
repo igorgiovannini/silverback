@@ -3,6 +3,9 @@
 
 namespace Silverback.Messaging.Messages
 {
+    /// <summary>
+    ///     Wraps a message when it's being transferred over a message broker.
+    /// </summary>
     public interface IEnvelope
     {
         /// <summary>

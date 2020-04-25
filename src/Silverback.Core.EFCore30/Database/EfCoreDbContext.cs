@@ -9,19 +9,23 @@ using Microsoft.EntityFrameworkCore;
 namespace Silverback.Database
 {
     /// <summary>
-    ///     An implementation of <see cref="IDbContext"/> that works with Entity Framework Core.
+    ///     An implementation of <see cref="IDbContext" /> that works with Entity Framework Core.
     /// </summary>
-    /// <typeparam name="TDbContext">The type of the underlying <see cref="DbContext"/>.</typeparam>
-    /// <inheritdoc cref="IDbContext"/>
+    /// <typeparam name="TDbContext">
+    ///     The type of the underlying <see cref="DbContext" />.
+    /// </typeparam>
+    /// <inheritdoc cref="IDbContext" />
     public class EfCoreDbContext<TDbContext> : IDbContext
         where TDbContext : DbContext
     {
         private readonly TDbContext _dbContext;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="EfCoreDbContext{TDbContext}"/> class.
+        ///     Initializes a new instance of the <see cref="EfCoreDbContext{TDbContext}" /> class.
         /// </summary>
-        /// <param name="dbContext">The type of the underlying <see cref="DbContext"/>.</param>
+        /// <param name="dbContext">
+        ///     The type of the underlying <see cref="DbContext" />.
+        /// </param>
         public EfCoreDbContext(TDbContext dbContext)
         {
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));

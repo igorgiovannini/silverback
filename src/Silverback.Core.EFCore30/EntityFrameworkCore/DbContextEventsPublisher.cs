@@ -17,8 +17,11 @@ namespace Silverback.EntityFrameworkCore
     public class DbContextEventsPublisher
     {
         private readonly Action<object> _clearEventsAction;
+
         private readonly DbContext _dbContext;
-        private readonly Func<object, IEnumerable<object>> _eventsSelector;
+
+        private readonly Func<object, IEnumerable<object>?> _eventsSelector;
+
         private readonly IPublisher _publisher;
 
         /// <summary>
@@ -55,7 +58,7 @@ namespace Silverback.EntityFrameworkCore
         ///     The custom delegate to be used to clear the events from the entities after they have been published.
         /// </param>
         public DbContextEventsPublisher(
-            Func<object, IEnumerable<object>> eventsSelector,
+            Func<object, IEnumerable<object>?> eventsSelector,
             Action<object> clearEventsAction,
             IPublisher publisher,
             DbContext dbContext)
@@ -139,14 +142,13 @@ namespace Silverback.EntityFrameworkCore
         }
 
         private IReadOnlyCollection<object> GetDomainEvents() =>
-            _dbContext
-                .ChangeTracker.Entries()
-                .SelectMany(e =>
+            _dbContext.ChangeTracker.Entries().SelectMany(
+                entityEntry =>
                 {
-                    var selected = _eventsSelector(e.Entity)?.ToList();
+                    var selected = _eventsSelector(entityEntry.Entity)?.ToList();
 
                     // Clear all events to avoid firing the same event multiple times during the recursion
-                    _clearEventsAction(e.Entity);
+                    _clearEventsAction(entityEntry.Entity);
 
                     return selected ?? Enumerable.Empty<object>();
                 }).ToList();
