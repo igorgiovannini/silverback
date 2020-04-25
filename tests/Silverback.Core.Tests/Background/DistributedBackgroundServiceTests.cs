@@ -18,17 +18,22 @@ namespace Silverback.Tests.Core.Background
 {
     public class DistributedBackgroundServiceTests
     {
-        private readonly IServiceProvider _servicesProvider;
+        private readonly IServiceProvider _serviceProvider;
 
         public DistributedBackgroundServiceTests()
         {
             var services = new ServiceCollection();
 
-            services.AddDbContext<TestDbContext>(opt => opt
-                .UseInMemoryDatabase("TestDbContext"));
-            services.AddSilverback().UseDbContext<TestDbContext>();
+            services
+                .AddTransient<IDistributedLockManager, DbDistributedLockManager>()
+                .AddDbContext<TestDbContext>(
+                    opt => opt
+                        .UseInMemoryDatabase("TestDbContext"))
+                .AddNullLogger()
+                .AddSilverback()
+                .UseDbContext<TestDbContext>();
 
-            _servicesProvider = services.BuildServiceProvider();
+            _serviceProvider = services.BuildServiceProvider();
         }
 
         [Fact]
@@ -36,11 +41,13 @@ namespace Silverback.Tests.Core.Background
         {
             bool executed = false;
 
-            var service = new TestDistributedBackgroundService(_ =>
-            {
-                executed = true;
-                return Task.CompletedTask;
-            }, new NullLockManager());
+            var service = new TestDistributedBackgroundService(
+                _ =>
+                {
+                    executed = true;
+                    return Task.CompletedTask;
+                },
+                new NullLockManager());
             await service.StartAsync(CancellationToken.None);
 
             AsyncTestingUtil.Wait(() => executed);
@@ -53,11 +60,13 @@ namespace Silverback.Tests.Core.Background
         {
             bool executed = false;
 
-            var service = new TestDistributedBackgroundService(_ =>
-            {
-                executed = true;
-                return Task.CompletedTask;
-            }, new DbDistributedLockManager(_servicesProvider));
+            var service = new TestDistributedBackgroundService(
+                _ =>
+                {
+                    executed = true;
+                    return Task.CompletedTask;
+                },
+                _serviceProvider.GetRequiredService<DbDistributedLockManager>());
             await service.StartAsync(CancellationToken.None);
 
             AsyncTestingUtil.Wait(() => executed);
@@ -71,24 +80,28 @@ namespace Silverback.Tests.Core.Background
             bool executed1 = false;
             bool executed2 = false;
 
-            var service1 = new TestDistributedBackgroundService(async stoppingToken =>
-            {
-                executed1 = true;
-
-                while (!stoppingToken.IsCancellationRequested)
+            var service1 = new TestDistributedBackgroundService(
+                async stoppingToken =>
                 {
-                    await Task.Delay(10, stoppingToken);
-                }
-            }, new DbDistributedLockManager(_servicesProvider));
+                    executed1 = true;
+
+                    while (!stoppingToken.IsCancellationRequested)
+                    {
+                        await Task.Delay(10, stoppingToken);
+                    }
+                },
+                _serviceProvider.GetRequiredService<DbDistributedLockManager>());
             await service1.StartAsync(CancellationToken.None);
 
             await AsyncTestingUtil.WaitAsync(() => executed1);
 
-            var service2 = new TestDistributedBackgroundService(_ =>
-            {
-                executed2 = true;
-                return Task.CompletedTask;
-            }, new DbDistributedLockManager(_servicesProvider));
+            var service2 = new TestDistributedBackgroundService(
+                _ =>
+                {
+                    executed2 = true;
+                    return Task.CompletedTask;
+                },
+                _serviceProvider.GetRequiredService<DbDistributedLockManager>());
             await service2.StartAsync(CancellationToken.None);
 
             await AsyncTestingUtil.WaitAsync(() => executed2, 100);

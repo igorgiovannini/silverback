@@ -6,14 +6,57 @@ using System.Threading.Tasks;
 
 namespace Silverback.Background
 {
+    /// <summary>
+    ///     Implements a lock mechanism that relies on a shared persisted storage (such as a database)
+    ///     to synchronize different processes.
+    /// </summary>
     public interface IDistributedLockManager
     {
+        /// <summary>
+        ///     Acquires a new lock on the specified resource.
+        /// </summary>
+        /// <param name="settings">
+        ///     Specifies all settings of the lock to be acquired.
+        /// </param>
+        /// <param name="cancellationToken">
+        ///     The cancellation token that will be checked prior to completing the returned Task
+        /// </param>
+        /// <returns>
+        ///     The acquired <see cref="DistributedLock" />.
+        /// </returns>
         Task<DistributedLock> Acquire(DistributedLockSettings settings, CancellationToken cancellationToken = default);
 
+        /// <summary>
+        ///     Returns a boolean value indicating whether the specified lock is taken already.
+        /// </summary>
+        /// <param name="settings">
+        ///     Specifies the lock to be checked.
+        /// </param>
+        /// <returns>
+        ///     A boolean value indicating whether the lock is taken.
+        /// </returns>
         Task<bool> CheckIsStillLocked(DistributedLockSettings settings);
 
+        /// <summary>
+        ///     Called periodically after the lock has been acquired to send an heartbeat that keeps the lock.
+        /// </summary>
+        /// <param name="settings">
+        ///     Specifies the lock to be refreshed.
+        /// </param>
+        /// <returns>
+        ///     A boolean value indicating whether the lock could be refreshed.
+        /// </returns>
         Task<bool> SendHeartbeat(DistributedLockSettings settings);
 
+        /// <summary>
+        ///     Releases the lock.
+        /// </summary>
+        /// <param name="settings">
+        ///     Specifies the lock to be released.
+        /// </param>
+        /// <returns>
+        ///     A <see cref="Task" /> representing the asynchronous operation.
+        /// </returns>
         Task Release(DistributedLockSettings settings);
     }
 }
