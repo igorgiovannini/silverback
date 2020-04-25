@@ -3,6 +3,7 @@
 
 using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,33 +14,43 @@ using Silverback.Database;
 namespace Silverback.Background
 {
     /// <inheritdoc />
+    [SuppressMessage(
+        "ReSharper",
+        "CA1031",
+        Justification = "It's ok to swallow all exceptions and there isn't much else that can be done here.")]
     public class DbDistributedLockManager : IDistributedLockManager
     {
         private static readonly IDistributedLockManager NullLockManager = new NullLockManager();
 
-        private readonly IServiceScopeFactory _serviceScopeFactory;
-
         private readonly ILogger<DbDistributedLockManager> _logger;
 
+        private readonly IServiceScopeFactory _serviceScopeFactory;
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="DbDistributedLockManager"/> class.
+        ///     Initializes a new instance of the <see cref="DbDistributedLockManager" /> class.
         /// </summary>
-        public DbDistributedLockManager(IServiceScopeFactory serviceScopeFactory, ILogger<DbDistributedLockManager> logger)
+        /// <param name="serviceScopeFactory">
+        ///     The <see cref="IServiceScopeFactory" /> instance used to resolve the scoped types.
+        /// </param>
+        /// <param name="logger">
+        ///     The <see cref="ILogger" /> instance.
+        /// </param>
+        public DbDistributedLockManager(
+            IServiceScopeFactory serviceScopeFactory,
+            ILogger<DbDistributedLockManager> logger)
         {
             _serviceScopeFactory = serviceScopeFactory ?? throw new ArgumentNullException(nameof(serviceScopeFactory));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <inheritdoc />
         public async Task<DistributedLock> Acquire(
             DistributedLockSettings settings,
             CancellationToken cancellationToken = default)
         {
             if (settings == null)
                 throw new ArgumentNullException(nameof(settings));
-            
+
             if (string.IsNullOrEmpty(settings.ResourceName))
             {
                 throw new InvalidOperationException(
@@ -75,6 +86,7 @@ namespace Silverback.Background
             throw new TimeoutException($"Timeout waiting to get the required lock '{settings.ResourceName}'.");
         }
 
+        /// <inheritdoc />
         public async Task<bool> CheckIsStillLocked(DistributedLockSettings settings)
         {
             if (settings == null)
@@ -99,11 +111,12 @@ namespace Silverback.Background
                     "Failed to check lock {lockName} ({lockUniqueId}). See inner exception for details.",
                     settings.ResourceName,
                     settings.UniqueId);
-            }
 
-            return false;
+                return false;
+            }
         }
 
+        /// <inheritdoc />
         public async Task<bool> SendHeartbeat(DistributedLockSettings settings)
         {
             if (settings == null)
@@ -129,6 +142,7 @@ namespace Silverback.Background
             }
         }
 
+        /// <inheritdoc />
         public async Task Release(DistributedLockSettings settings)
         {
             if (settings == null)

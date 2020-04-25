@@ -29,7 +29,7 @@ namespace Silverback.Messaging.Publishing
         ///     The <see cref="IServiceProvider" /> instance to be used to resolve the subscribers.
         /// </param>
         /// <param name="logger">
-        ///     The <see cref="ILogger{TCategoryName}" /> instance.
+        ///     The <see cref="ILogger" /> instance.
         /// </param>
         public Publisher(IServiceProvider serviceProvider, ILogger<Publisher> logger)
         {

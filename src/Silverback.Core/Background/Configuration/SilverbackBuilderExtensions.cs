@@ -17,6 +17,7 @@ namespace Microsoft.Extensions.DependencyInjection
         ///     Adds the <see cref="IDistributedLockManager" /> implementation and uses the specified DbContext to
         ///     handle the distributed locks.
         /// </summary>
+        /// <param name="builder">The <see cref="ISilverbackBuilder"/> to add the model types to.</param>
         /// <returns>The <see cref="ISilverbackBuilder"/> so that additional calls can be chained.</returns>
         public static ISilverbackBuilder AddDbDistributedLockManager(this ISilverbackBuilder builder)
         {
