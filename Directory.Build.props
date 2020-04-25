@@ -4,16 +4,6 @@
     <BaseVersion>2.2.0$(VersionSuffix)</BaseVersion>
     <DatabasePackagesRevision>1</DatabasePackagesRevision>
     <DatabasePackagesVersionSuffix>-ignored</DatabasePackagesVersionSuffix>
-    <Authors>Sergio Aquilini</Authors>
-    <Company></Company>
-    <Description>Silverback is a simple but feature-rich framework to build reactive/event-driven applications or microservices.</Description>
-    <License>MIT</License>
-    <Copyright>Copyright (c) 2020 Sergio Aquilini</Copyright>
-    <ProjectUrl>https://beagle1984.github.io/silverback/</ProjectUrl>
-    <RepositoryUrl>https://github.com/BEagle1984/silverback/</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <Tags>Microservices Bus Kafka RabbitMQ Messaging Event Sourcing DDD Domain Driven CQRS Mediator</Tags>
-    <IconUrl>https://github.com/BEagle1984/silverback/raw/develop/graphics/Icon.png</IconUrl>
   </PropertyGroup>
 
   <PropertyGroup Label="Build">

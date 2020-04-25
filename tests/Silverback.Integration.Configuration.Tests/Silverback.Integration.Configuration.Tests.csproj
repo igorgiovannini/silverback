@@ -4,8 +4,7 @@
     <TargetFramework>$(NetCoreTargetVersion)</TargetFramework>
     <RootNamespace>Silverback.Tests.Integration.Configuration</RootNamespace>
     <LangVersion>$(LangVersion)</LangVersion>
-    <CodeAnalysisRuleSet>..\..\Tests.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
+    </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="5.10.3" />

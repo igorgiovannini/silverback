@@ -83,6 +83,21 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silverback.Tests.Common", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silverback.Integration.Tests.E2E", "tests\Silverback.Integration.Tests.E2E\Silverback.Integration.Tests.E2E.csproj", "{E9006DFF-E8EA-410E-8E85-67E2EBAF0109}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{40A3FAE3-7298-4A07-9BEC-32E2C10FDC83}"
+ProjectSection(SolutionItems) = preProject
+	src\Directory.Build.props = src\Directory.Build.props
+EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{AF991E12-F761-4D3D-82DC-BA204813C54E}"
+ProjectSection(SolutionItems) = preProject
+	tests\DirectoryBuild.props = tests\DirectoryBuild.props
+EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{65B73763-9024-43A1-BFAF-045863CAEE1A}"
+ProjectSection(SolutionItems) = preProject
+	tools\Directory.Build.props = tools\Directory.Build.props
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -226,6 +241,9 @@ Global
 		{7A461DE8-622A-4946-80ED-06086A3884EF} = {6AFB87A3-501B-4A87-B94C-205AEB118D97}
 		{5D0507A1-FD7B-46F7-99AC-4904E0DD47D9} = {6AFB87A3-501B-4A87-B94C-205AEB118D97}
 		{E9006DFF-E8EA-410E-8E85-67E2EBAF0109} = {6AFB87A3-501B-4A87-B94C-205AEB118D97}
+		{40A3FAE3-7298-4A07-9BEC-32E2C10FDC83} = {C177137F-A084-4178-805F-890F0A175A56}
+		{AF991E12-F761-4D3D-82DC-BA204813C54E} = {C177137F-A084-4178-805F-890F0A175A56}
+		{65B73763-9024-43A1-BFAF-045863CAEE1A} = {C177137F-A084-4178-805F-890F0A175A56}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {89DA4AF5-B982-42AD-A829-8A72BCB21227}
