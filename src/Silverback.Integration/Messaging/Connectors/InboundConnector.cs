@@ -75,7 +75,7 @@ namespace Silverback.Messaging.Connectors
             var inboundProcessors = consumer.Behaviors.OfType<InboundProcessorConsumerBehavior>().ToList();
 
             if (inboundProcessors.Count != 1)
-                throw new SilverbackException("No InboundProcessorConsumerBehavior is configured.");
+                throw new InvalidOperationException("No InboundProcessorConsumerBehavior is configured.");
 
             var inboundProcessor = inboundProcessors.First();
 

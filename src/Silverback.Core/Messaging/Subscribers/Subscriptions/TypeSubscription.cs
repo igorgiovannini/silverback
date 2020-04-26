@@ -10,13 +10,13 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Silverback.Messaging.Subscribers.Subscriptions
 {
     /// <summary>
-    ///     Represents a subscription based on a base type (
+    ///     Represents a subscription based on a type (e.g. <see cref="ISubscriber"/>).
     /// </summary>
     internal class TypeSubscription : ISubscription
     {
         private readonly bool _autoSubscribeAllPublicMethods;
 
-        private IReadOnlyCollection<SubscribedMethod> _subscribedMethods = null;
+        private IReadOnlyCollection<SubscribedMethod>? _subscribedMethods;
 
         public TypeSubscription(Type subscribedType, bool autoSubscribeAllPublicMethods = true)
         {

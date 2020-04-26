@@ -41,8 +41,10 @@ namespace Silverback.Messaging.Connectors
             }
 
             if (connector == null)
-                throw new SilverbackException(
+            {
+                throw new InvalidOperationException(
                     $"No instance of {connectorType?.Name ?? "IOutboundConnector"} was resolved.");
+            }
 
             return connector;
         }

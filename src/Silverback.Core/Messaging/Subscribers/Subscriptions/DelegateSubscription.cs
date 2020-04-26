@@ -15,7 +15,8 @@ namespace Silverback.Messaging.Subscribers.Subscriptions
 
         public DelegateSubscription(Delegate handler, SubscriptionOptions options)
         {
-            if (handler == null) throw new ArgumentNullException(nameof(handler));
+            if (handler == null)
+                throw new ArgumentNullException(nameof(handler));
 
             _method = new SubscribedMethod(
                 _ => handler.Target,
@@ -25,7 +26,7 @@ namespace Silverback.Messaging.Subscribers.Subscriptions
                 options?.MaxDegreeOfParallelism);
         }
 
-        public IEnumerable<SubscribedMethod> GetSubscribedMethods(IServiceProvider _) =>
+        public IReadOnlyCollection<SubscribedMethod> GetSubscribedMethods(IServiceProvider _) =>
             new[] { _method };
     }
 }

@@ -14,7 +14,7 @@ namespace Silverback.Messaging.Subscribers.ReturnValueHandlers
 
         public ReturnValueHandler(IEnumerable<IReturnValueHandler> returnValueHandlers)
         {
-            // Revert the handlers order, to give priority to the ones added after the 
+            // Revert the handlers order, to give priority to the ones added after the
             // default ones.
             _returnValueHandlers = returnValueHandlers.Reverse().ToList();
         }

@@ -4,22 +4,14 @@
 namespace Silverback.Tests.Core.EFCore22.TestTypes.Base.Domain
 {
     public abstract class DomainEvent<TEntity> : IDomainEvent<TEntity>
+        where TEntity : class
     {
-        public TEntity Source { get; set; }
+        public TEntity? Source { get; set; }
 
-        protected DomainEvent(TEntity source)
-        {
-            Source = source;
-        }
-
-        protected DomainEvent()
-        {
-        }
-
-        object IDomainEvent.Source
+        object? IDomainEvent.Source
         {
             get => Source;
-            set => Source = (TEntity) value;
+            set => Source = (TEntity?)value;
         }
     }
 }

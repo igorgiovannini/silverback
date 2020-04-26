@@ -12,6 +12,7 @@ namespace Silverback.Domain
         /// <inheritdoc />
         public TEntity? Source { get; set; }
 
+        /// <inheritdoc />
         object? IMessageWithSource.Source
         {
             get => Source;

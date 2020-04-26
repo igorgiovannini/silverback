@@ -32,7 +32,7 @@ namespace Silverback.Messaging.Configuration
         public static IBusConfigurator Subscribe(
             this IBusConfigurator busConfigurator,
             Delegate handler,
-            SubscriptionOptions options = null)
+            SubscriptionOptions? options = null)
         {
             if (busConfigurator == null)
                 throw new ArgumentNullException(nameof(busConfigurator));
@@ -63,7 +63,7 @@ namespace Silverback.Messaging.Configuration
         public static IBusConfigurator Subscribe<TMessage>(
             this IBusConfigurator busConfigurator,
             Action<TMessage> handler,
-            SubscriptionOptions options = null)
+            SubscriptionOptions? options = null)
         {
             if (busConfigurator == null)
                 throw new ArgumentNullException(nameof(busConfigurator));
@@ -94,7 +94,7 @@ namespace Silverback.Messaging.Configuration
         public static IBusConfigurator Subscribe<TMessage>(
             this IBusConfigurator busConfigurator,
             Func<TMessage, Task> handler,
-            SubscriptionOptions options = null)
+            SubscriptionOptions? options = null)
         {
             if (busConfigurator == null)
                 throw new ArgumentNullException(nameof(busConfigurator));
@@ -125,7 +125,7 @@ namespace Silverback.Messaging.Configuration
         public static IBusConfigurator Subscribe<TMessage>(
             this IBusConfigurator busConfigurator,
             Func<TMessage, object> handler,
-            SubscriptionOptions options = null)
+            SubscriptionOptions? options = null)
         {
             if (busConfigurator == null)
                 throw new ArgumentNullException(nameof(busConfigurator));

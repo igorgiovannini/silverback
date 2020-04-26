@@ -48,7 +48,7 @@ namespace Silverback.Messaging.Subscribers
             Parameters = methodInfo.GetParameters();
 
             if (!Parameters.Any())
-                throw new SilverbackException("The subscribed method must have at least 1 argument.");
+                throw new SubscribedMethodInvocationException("The subscribed method must have at least 1 argument.");
 
             Filters = methodInfo.GetCustomAttributes<MessageFilterAttribute>(false).ToList();
 

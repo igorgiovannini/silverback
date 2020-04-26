@@ -43,8 +43,8 @@ namespace Silverback.Background
         ///     The interval at which the heartbeat has to be sent (default is 1 second).
         /// </param>
         public DistributedLockSettings(
-            string resourceName = null,
-            string uniqueId = null,
+            string? resourceName = null,
+            string? uniqueId = null,
             TimeSpan? acquireTimeout = null,
             TimeSpan? acquireRetryInterval = null,
             TimeSpan? heartbeatTimeout = null,

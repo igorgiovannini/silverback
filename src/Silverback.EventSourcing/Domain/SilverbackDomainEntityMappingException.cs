@@ -4,44 +4,45 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace Silverback
+namespace Silverback.Domain
 {
     /// <summary>
-    ///     The base class for all the custom exceptions thrown by Silverback.
+    ///     The exception that is thrown when the stored events cannot be applied back to the domain
+    ///     entity.
     /// </summary>
-    public abstract class SilverbackException : Exception
+    public class SilverbackEventSourcingException : SilverbackException
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="SilverbackException" /> class.
+        ///     Initializes a new instance of the <see cref="SilverbackEventSourcingException" /> class.
         /// </summary>
-        protected SilverbackException()
+        public SilverbackEventSourcingException()
         {
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="SilverbackException" /> class with the specified
-        ///     message.
+        ///     Initializes a new instance of the <see cref="SilverbackEventSourcingException" /> class with
+        ///     the specified message.
         /// </summary>
         /// <param name="message"> The exception message. </param>
-        protected SilverbackException(string message)
+        public SilverbackEventSourcingException(string message)
             : base(message)
         {
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="SilverbackException" /> class with the specified
-        ///     message and inner exception.
+        ///     Initializes a new instance of the <see cref="SilverbackEventSourcingException" /> class with
+        ///     the specified message and inner exception.
         /// </summary>
         /// <param name="message"> The exception message. </param>
         /// <param name="innerException"> The inner exception. </param>
-        protected SilverbackException(string message, Exception innerException)
+        public SilverbackEventSourcingException(string message, Exception innerException)
             : base(message, innerException)
         {
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="SilverbackException" /> class with the serialized
-        ///     data.
+        ///     Initializes a new instance of the <see cref="SilverbackEventSourcingException" /> class with
+        ///     the serialized data.
         /// </summary>
         /// <param name="info">
         ///     The <see cref="SerializationInfo" /> that holds the serialized object data about the exception
@@ -51,7 +52,7 @@ namespace Silverback
         ///     The <see cref="StreamingContext" /> that contains contextual information about the source or
         ///     destination.
         /// </param>
-        protected SilverbackException(SerializationInfo info, StreamingContext context)
+        public SilverbackEventSourcingException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }
