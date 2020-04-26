@@ -19,7 +19,7 @@ namespace Silverback.Background
         ///     Specifies all settings of the lock to be acquired.
         /// </param>
         /// <param name="cancellationToken">
-        ///     The cancellation token that will be checked prior to completing the returned Task
+        ///     A <see cref="CancellationToken" /> to observe while waiting for the task to complete.
         /// </param>
         /// <returns>
         ///     The acquired <see cref="DistributedLock" />.

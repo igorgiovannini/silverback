@@ -15,8 +15,9 @@ namespace Silverback.Messaging.Broker
     /// <inheritdoc cref="IProducer" />
     public abstract class Producer : IProducer
     {
-        private readonly MessageLogger _messageLogger;
         private readonly ILogger<Producer> _logger;
+
+        private readonly MessageLogger _messageLogger;
 
         protected Producer(
             IBroker broker,
@@ -35,8 +36,6 @@ namespace Silverback.Messaging.Broker
             Endpoint.Validate();
         }
 
-        public IReadOnlyCollection<IProducerBehavior> Behaviors { get; }
-
         /// <summary>
         ///     Gets the <see cref="IBroker" /> instance that owns this instance.
         /// </summary>
@@ -47,6 +46,8 @@ namespace Silverback.Messaging.Broker
         /// </summary>
         public IProducerEndpoint Endpoint { get; }
 
+        public IReadOnlyCollection<IProducerBehavior> Behaviors { get; }
+
         public void Produce(object message, IReadOnlyCollection<MessageHeader> headers = null) =>
             Produce(new OutboundEnvelope(message, headers, Endpoint));
 
@@ -54,17 +55,18 @@ namespace Silverback.Messaging.Broker
             ProduceAsync(new OutboundEnvelope(message, headers, Endpoint));
 
         public void Produce(IOutboundEnvelope envelope) =>
-            AsyncHelper.RunSynchronously(() =>
-                ExecutePipeline(
-                    Behaviors,
-                    new ProducerPipelineContext(envelope, this),
-                    finalContext =>
-                    {
-                        ((RawOutboundEnvelope) finalContext.Envelope).Offset =
-                            ProduceImpl(finalContext.Envelope);
+            AsyncHelper.RunSynchronously(
+                () =>
+                    ExecutePipeline(
+                        Behaviors,
+                        new ProducerPipelineContext(envelope, this),
+                        finalContext =>
+                        {
+                            ((RawOutboundEnvelope)finalContext.Envelope).Offset =
+                                ProduceImpl(finalContext.Envelope);
 
-                        return Task.CompletedTask;
-                    }));
+                            return Task.CompletedTask;
+                        }));
 
         public async Task ProduceAsync(IOutboundEnvelope envelope) =>
             await ExecutePipeline(
@@ -72,7 +74,7 @@ namespace Silverback.Messaging.Broker
                 new ProducerPipelineContext(envelope, this),
                 async finalContext =>
                 {
-                    ((RawOutboundEnvelope) finalContext.Envelope).Offset =
+                    ((RawOutboundEnvelope)finalContext.Envelope).Offset =
                         await ProduceAsyncImpl(finalContext.Envelope);
                 });
 
@@ -84,8 +86,10 @@ namespace Silverback.Messaging.Broker
             if (behaviors != null && behaviors.Any())
             {
                 await behaviors.First()
-                    .Handle(context, nextContext =>
-                        ExecutePipeline(behaviors.Skip(1).ToList(), nextContext, finalAction));
+                    .Handle(
+                        context,
+                        nextContext =>
+                            ExecutePipeline(behaviors.Skip(1).ToList(), nextContext, finalAction));
             }
             else
             {
@@ -97,15 +101,22 @@ namespace Silverback.Messaging.Broker
         /// <summary>
         ///     Publishes the specified message and returns its offset.
         /// </summary>
-        /// <param name="envelope">The <see cref="RawBrokerEnvelope" /> instance containing body, headers, endpoint, etc.</param>
-        /// <returns>The message offset.</returns>
+        /// <param name="envelope">
+        ///     The <see cref="RawBrokerEnvelope" /> instance containing body, headers, endpoint, etc.
+        /// </param>
+        /// <returns> The message offset. </returns>
         protected abstract IOffset ProduceImpl(IRawOutboundEnvelope envelope);
 
         /// <summary>
         ///     Publishes the specified message and returns its offset.
         /// </summary>
-        /// <param name="envelope">The <see cref="RawBrokerEnvelope" /> instance containing body, headers, endpoint, etc.</param>
-        /// <returns>The message offset.</returns>
+        /// <param name="envelope">
+        ///     The <see cref="RawBrokerEnvelope" /> instance containing body, headers, endpoint, etc.
+        /// </param>
+        /// <returns>
+        ///     A <see cref="Task" /> representing the asynchronous operation. The task result contains the
+        ///     message offset.
+        /// </returns>
         protected abstract Task<IOffset> ProduceAsyncImpl(IRawOutboundEnvelope envelope);
     }
 
@@ -127,11 +138,11 @@ namespace Silverback.Messaging.Broker
         /// <summary>
         ///     Gets the <typeparamref name="TBroker" /> instance that owns this instance.
         /// </summary>
-        protected new TBroker Broker => (TBroker) base.Broker;
+        protected new TBroker Broker => (TBroker)base.Broker;
 
         /// <summary>
         ///     Gets the <typeparamref name="TEndpoint" /> this instance is connected to.
         /// </summary>
-        protected new TEndpoint Endpoint => (TEndpoint) base.Endpoint;
+        protected new TEndpoint Endpoint => (TEndpoint)base.Endpoint;
     }
 }

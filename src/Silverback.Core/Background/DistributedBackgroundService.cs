@@ -12,8 +12,7 @@ namespace Silverback.Background
 {
     /// <summary>
     ///     Extends the <see cref="Microsoft.Extensions.Hosting.BackgroundService" /> adding a distributed
-    ///     lock
-    ///     mechanism to prevent concurrent executions.
+    ///     lock mechanism to prevent concurrent executions.
     /// </summary>
     public abstract class DistributedBackgroundService : BackgroundService
     {
@@ -115,7 +114,7 @@ namespace Silverback.Background
         ///     the lifetime of the long running operation(s) being performed.
         /// </summary>
         /// <param name="stoppingToken">
-        ///     Triggered when <see cref="IHostedService.StopAsync(CancellationToken)" /> is called.
+        ///     A <see cref="CancellationToken" /> to observe while waiting for the task to complete.
         /// </param>
         /// <returns>
         ///     A <see cref="Task" /> that represents the long running operations.

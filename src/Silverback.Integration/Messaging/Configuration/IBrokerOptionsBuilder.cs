@@ -208,7 +208,7 @@ namespace Silverback.Messaging.Configuration
             bool enforceMessageOrder = true,
             int readPackageSize = 100,
             bool removeProduced = true);
-        
+
         #endregion
 
         #region AddChunkStore
@@ -307,37 +307,45 @@ namespace Silverback.Messaging.Configuration
 
         /// <summary>
         ///     Adds a singleton behavior of the type specified in <paramref name="behaviorType" /> to the
-        ///     <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
+        ///     <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
         /// </summary>
         /// <param name="behaviorType">The type of the behavior to register and the implementation to use.</param>
-        /// <returns>A reference to this instance after the operation has completed.</returns>
+        /// <returns>
+        ///     This <see cref="IBrokerOptionsBuilder" /> instance so that additional calls can be chained.
+        /// </returns>
         IBrokerOptionsBuilder AddSingletonBrokerBehavior(Type behaviorType);
 
         /// <summary>
         ///     Adds a singleton behavior of the type specified in <typeparamref name="TBehavior" /> to the
-        ///     <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
+        ///     <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
         /// </summary>
         /// <typeparam name="TBehavior">The type of the behavior to add.</typeparam>
-        /// <returns>A reference to this instance after the operation has completed.</returns>
+        /// <returns>
+        ///     This <see cref="IBrokerOptionsBuilder" /> instance so that additional calls can be chained.
+        /// </returns>
         IBrokerOptionsBuilder AddSingletonBrokerBehavior<TBehavior>()
             where TBehavior : class, IBrokerBehavior;
 
         /// <summary>
         ///     Adds a singleton behavior with a
         ///     factory specified in <paramref name="implementationFactory" /> to the
-        ///     <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
+        ///     <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
         /// </summary>
         /// <param name="implementationFactory">The factory that creates the service.</param>
-        /// <returns>A reference to this instance after the operation has completed.</returns>
+        /// <returns>
+        ///     This <see cref="IBrokerOptionsBuilder" /> instance so that additional calls can be chained.
+        /// </returns>
         IBrokerOptionsBuilder AddSingletonBrokerBehavior(Func<IServiceProvider, IBrokerBehavior> implementationFactory);
 
         /// <summary>
         ///     Adds a singleton behavior with an
         ///     instance specified in <paramref name="implementationInstance" /> to the
-        ///     <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
+        ///     <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
         /// </summary>
         /// <param name="implementationInstance">The instance of the service.</param>
-        /// <returns>A reference to this instance after the operation has completed.</returns>
+        /// <returns>
+        ///     This <see cref="IBrokerOptionsBuilder" /> instance so that additional calls can be chained.
+        /// </returns>
         IBrokerOptionsBuilder AddSingletonBrokerBehavior(IBrokerBehavior implementationInstance);
 
         #endregion
@@ -346,37 +354,45 @@ namespace Silverback.Messaging.Configuration
 
         /// <summary>
         ///     Adds a singleton outbound router of the type specified in <paramref name="routerType" /> to the
-        ///     <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
+        ///     <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
         /// </summary>
         /// <param name="routerType">The type of the outbound router to register and the implementation to use.</param>
-        /// <returns>A reference to this instance after the operation has completed.</returns>
+        /// <returns>
+        ///     This <see cref="IBrokerOptionsBuilder" /> instance so that additional calls can be chained.
+        /// </returns>
         IBrokerOptionsBuilder AddSingletonOutboundRouter(Type routerType);
 
         /// <summary>
         ///     Adds a singleton outbound router of the type specified in <typeparamref name="TRouter" /> to the
-        ///     <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
+        ///     <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
         /// </summary>
         /// <typeparam name="TRouter">The type of the outbound router to add.</typeparam>
-        /// <returns>A reference to this instance after the operation has completed.</returns>
+        /// <returns>
+        ///     This <see cref="IBrokerOptionsBuilder" /> instance so that additional calls can be chained.
+        /// </returns>
         IBrokerOptionsBuilder AddSingletonOutboundRouter<TRouter>()
             where TRouter : class, IOutboundRouter;
 
         /// <summary>
         ///     Adds a singleton outbound router with a
         ///     factory specified in <paramref name="implementationFactory" /> to the
-        ///     <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
+        ///     <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
         /// </summary>
         /// <param name="implementationFactory">The factory that creates the service.</param>
-        /// <returns>A reference to this instance after the operation has completed.</returns>
+        /// <returns>
+        ///     This <see cref="IBrokerOptionsBuilder" /> instance so that additional calls can be chained.
+        /// </returns>
         IBrokerOptionsBuilder AddSingletonOutboundRouter(Func<IServiceProvider, IOutboundRouter> implementationFactory);
 
         /// <summary>
         ///     Adds a singleton outbound router with an
         ///     instance specified in <paramref name="implementationInstance" /> to the
-        ///     <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
+        ///     <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
         /// </summary>
         /// <param name="implementationInstance">The instance of the service.</param>
-        /// <returns>A reference to this instance after the operation has completed.</returns>
+        /// <returns>
+        ///     This <see cref="IBrokerOptionsBuilder" /> instance so that additional calls can be chained.
+        /// </returns>
         IBrokerOptionsBuilder AddSingletonOutboundRouter(IOutboundRouter implementationInstance);
 
         #endregion

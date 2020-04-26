@@ -17,7 +17,7 @@ namespace Silverback.Messaging.Publishing
         /// </summary>
         /// <param name="messages">The messages being published.</param>
         /// <param name="next">The next behavior in the pipeline.</param>
-        /// <returns>The actual messages to be published.</returns>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation. The task result contains the actual messages to be published.</returns>
         Task<IReadOnlyCollection<object>> Handle(IReadOnlyCollection<object> messages, MessagesHandler next);
     }
 }
