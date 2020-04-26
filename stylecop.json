@@ -14,10 +14,12 @@
         "licenseName": "MIT",
         "licenseFile": "LICENSE"
       },
+      "documentInterfaces": false,
       "documentExposedElements": true,
       "documentInternalElements": false,
       "documentPrivateElements":  false,
-      "documentPrivateFields": false
+      "documentPrivateFields": false,
+      "fileNamingConvention": "metadata"
     }
   }
 }
