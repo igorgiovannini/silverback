@@ -8,7 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace Silverback.Background.Model
 {
     /// <summary>
-    ///     The model of the persisted lock written by the <see cref="IDistributedLockManager"/>. 
+    ///     The model of the persisted lock written by the <see cref="IDistributedLockManager"/>.
     /// </summary>
     public class Lock
     {

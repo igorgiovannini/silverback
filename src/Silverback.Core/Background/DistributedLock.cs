@@ -47,7 +47,9 @@ namespace Silverback.Background
         /// <param name="cancellationToken">
         ///     A <see cref="CancellationToken" /> to observe while waiting for the task to complete.
         /// </param>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        /// <returns>
+        ///     A <see cref="Task" /> representing the asynchronous operation.
+        /// </returns>
         public async Task Renew(CancellationToken cancellationToken = default)
         {
             if (Status == DistributedLockStatus.Released)
@@ -66,6 +68,12 @@ namespace Silverback.Background
             }
         }
 
+        /// <summary>
+        ///     Releases the lock.
+        /// </summary>
+        /// <returns>
+        ///     A <see cref="Task" /> representing the asynchronous operation.
+        /// </returns>
         public async Task Release()
         {
             Status = DistributedLockStatus.Released;

@@ -152,7 +152,7 @@ namespace Silverback.Tests.Integration.Messaging.Configuration
             GetBusConfigurator().Connect(endpoints => endpoints
                 .AddInbound(TestConsumerEndpoint.GetDefault()));
 
-            var consumer = (TestConsumer) GetBroker().Consumers.First();
+            var consumer = (TestConsumer) GetBroker().Consumers[0];
             await consumer.TestHandleMessage(new TestEventOne());
             await consumer.TestHandleMessage(new TestEventTwo());
             await consumer.TestHandleMessage(new TestEventOne());
@@ -178,9 +178,10 @@ namespace Silverback.Tests.Integration.Messaging.Configuration
                 endpoints
                     .AddInbound(TestConsumerEndpoint.GetDefault()));
 
-            var consumer = (TestConsumer) GetBroker().Consumers.First();
+            var consumer = (TestConsumer) GetBroker().Consumers[0];
             var duplicatedId = Guid.NewGuid();
-            await consumer.TestHandleMessage(new TestEventOne(),
+            await consumer.TestHandleMessage(
+                new TestEventOne(),
                 new[]
                 {
                     new MessageHeader("x-message-id", Guid.NewGuid().ToString())

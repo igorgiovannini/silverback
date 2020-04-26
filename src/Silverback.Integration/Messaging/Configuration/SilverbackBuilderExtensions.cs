@@ -110,7 +110,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
         /// <summary>
         ///     Adds a singleton behavior of the type specified in <paramref name="behaviorType" /> to the
-        ///     <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
+        ///     <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
         /// </summary>
         /// <param name="builder"></param>
         /// <param name="behaviorType">The type of the behavior to register and the implementation to use.</param>
@@ -125,7 +125,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
         /// <summary>
         ///     Adds a singleton behavior of the type specified in <typeparamref name="TBehavior" /> to the
-        ///     <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
+        ///     <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
         /// </summary>
         /// <typeparam name="TBehavior">The type of the behavior to add.</typeparam>
         /// <param name="builder"></param>
@@ -142,7 +142,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <summary>
         ///     Adds a singleton behavior with a
         ///     factory specified in <paramref name="implementationFactory" /> to the
-        ///     <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
+        ///     <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
         /// </summary>
         /// <param name="builder"></param>
         /// <param name="implementationFactory">The factory that creates the service.</param>
@@ -160,7 +160,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <summary>
         ///     Adds a singleton behavior with an
         ///     instance specified in <paramref name="implementationInstance" /> to the
-        ///     <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
+        ///     <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
         /// </summary>
         /// <param name="builder"></param>
         /// <param name="implementationInstance">The instance of the service.</param>
@@ -181,7 +181,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
         /// <summary>
         ///     Adds a singleton outbound router of the type specified in <paramref name="routerType" /> to the
-        ///     <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
+        ///     <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
         /// </summary>
         /// <param name="builder"></param>
         /// <param name="routerType">The type of the outbound router to register and the implementation to use.</param>
@@ -196,7 +196,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
         /// <summary>
         ///     Adds a singleton outbound router of the type specified in <typeparamref name="TRouter" /> to the
-        ///     <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
+        ///     <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
         /// </summary>
         /// <typeparam name="TRouter">The type of the outbound router to add.</typeparam>
         /// <param name="builder"></param>
@@ -213,7 +213,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <summary>
         ///     Adds a singleton outbound router with a
         ///     factory specified in <paramref name="implementationFactory" /> to the
-        ///     <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
+        ///     <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
         /// </summary>
         /// <param name="builder"></param>
         /// <param name="implementationFactory">The factory that creates the service.</param>
@@ -231,7 +231,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <summary>
         ///     Adds a singleton outbound router with an
         ///     instance specified in <paramref name="implementationInstance" /> to the
-        ///     <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
+        ///     <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
         /// </summary>
         /// <param name="builder"></param>
         /// <param name="implementationInstance">The instance of the service.</param>

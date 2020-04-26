@@ -60,13 +60,14 @@ namespace Silverback.Background
             HeartbeatTimeout = heartbeatTimeout ?? DefaultHeartbeatTimeout;
             HeartbeatInterval = heartbeatInterval ?? DefaultHeartbeatInterval;
 
-            FailedHeartbeatsThreshold = Math.Min(
-                0,
-                (int)(HeartbeatTimeout.TotalMilliseconds / HeartbeatInterval.TotalMilliseconds) - 1);
+            int heartbeatsBeforeTimeout =
+                (int)(HeartbeatTimeout.TotalMilliseconds / HeartbeatInterval.TotalMilliseconds) - 1;
+
+            FailedHeartbeatsThreshold = Math.Min(0, heartbeatsBeforeTimeout);
         }
 
         /// <summary>
-        ///     The <see cref="DistributedLockSettings" /> signaling that no lock is to be checked and
+        ///     Gets the <see cref="DistributedLockSettings" /> signaling that no lock is to be checked and
         ///     acquired. Corresponds to an instance of <see cref="NullLockSettings" />.
         /// </summary>
         public static DistributedLockSettings NoLock { get; } = new NullLockSettings();

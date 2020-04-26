@@ -23,7 +23,8 @@ namespace Silverback.Background
         private readonly ILogger<DistributedBackgroundService> _logger;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="DistributedBackgroundService" /> class.
+        ///     Initializes a new instance of the <see cref="DistributedBackgroundService" /> class using the default
+        ///     settings for the lock mechanism.
         /// </summary>
         /// <param name="distributedLockManager">
         ///     The <see cref="IDistributedLockManager" /> instance.
@@ -42,7 +43,7 @@ namespace Silverback.Background
         ///     Initializes a new instance of the <see cref="DistributedBackgroundService" /> class.
         /// </summary>
         /// <param name="distributedLockSettings">
-        ///     Specifies all settings of the lock to be acquired.
+        ///     Customizes the lock mechanism settings.
         /// </param>
         /// <param name="distributedLockManager">
         ///     The <see cref="IDistributedLockManager" /> instance.

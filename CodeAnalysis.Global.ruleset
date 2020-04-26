@@ -764,6 +764,8 @@
     <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
         <Rule Id="SA0001" Action="Warning" /> <!-- XmlCommentAnalysisDisabled -->
         <Rule Id="SA1101" Action="None" /> <!-- PrefixLocalCallsWithThis -->
+        <Rule Id="SA1118" Action="Warning" /> <!-- SA1118ParameterMustNotSpanMultipleLines -->
+        <Rule Id="SA1133" Action="None" /> <!-- SA1133DoNotCombineAttributes -->
         <Rule Id="SA1204" Action="None" /> <!-- StaticElementsMustAppearBeforeInstanceElements -->
         <Rule Id="SA1309" Action="None" /> <!-- FieldNamesMustNotBeginWithUnderscore -->
         <Rule Id="SA1413" Action="None" /> <!-- UseTrailingCommasInMultiLineInitializers -->
@@ -773,6 +775,5 @@
         <Rule Id="SA1623" Action="Warning" /> <!-- SA1623PropertySummaryDocumentationMustMatchAccessors -->
         <Rule Id="SA1633" Action="Warning" /> <!-- FileMustHaveHeader -->
         <Rule Id="SA1503" Action="None" /> <!-- BracesMustNotBeOmitted -->
-        <Rule Id="SA1133" Action="None" /> <!-- SA1133DoNotCombineAttributes -->
     </Rules>
 </RuleSet>
