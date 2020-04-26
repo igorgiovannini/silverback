@@ -14,7 +14,6 @@ namespace Silverback.Database
     /// <typeparam name="TDbContext">
     ///     The type of the underlying <see cref="DbContext" />.
     /// </typeparam>
-    /// <inheritdoc cref="IDbContext" />
     public class EfCoreDbContext<TDbContext> : IDbContext
         where TDbContext : DbContext
     {
@@ -36,7 +35,7 @@ namespace Silverback.Database
             where TEntity : class =>
             new EfCoreDbSet<TEntity>(
                 _dbContext.Set<TEntity>() ??
-                throw new SilverbackDatabaseTableNotFoundException($"The DbContext doesn't contain a DbSet<{typeof(TEntity).FullName}>."));
+                throw new DatabaseTableNotFoundException($"The DbContext doesn't contain a DbSet<{typeof(TEntity).FullName}>."));
 
         /// <inheritdoc />
         public void SaveChanges() => _dbContext.SaveChanges();

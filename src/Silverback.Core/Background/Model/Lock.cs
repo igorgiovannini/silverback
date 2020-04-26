@@ -17,13 +17,13 @@ namespace Silverback.Background.Model
         /// </summary>
         [Key]
         [MaxLength(500)]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         ///     Gets or sets a unique identifier representing the entity trying to acquire the lock.
         /// </summary>
         [MaxLength(200)]
-        public string UniqueId { get; set; }
+        public string? UniqueId { get; set; }
 
         /// <summary>
         ///     Gets or sets the record creation date.
@@ -40,6 +40,7 @@ namespace Silverback.Background.Model
         /// </summary>
         [Timestamp]
         [SuppressMessage("ReSharper", "CA1819", Justification = "No way around it with EF.")]
-        public byte[] Timestamp { get; set; }
+        [SuppressMessage("ReSharper", "SA1011", Justification = "[]? is recognized as wrongly spaced?")]
+        public byte[]? Timestamp { get; set; }
     }
 }

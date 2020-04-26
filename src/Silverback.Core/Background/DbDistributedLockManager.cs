@@ -44,7 +44,7 @@ namespace Silverback.Background
         }
 
         /// <inheritdoc />
-        public async Task<DistributedLock> Acquire(
+        public async Task<DistributedLock?> Acquire(
             DistributedLockSettings settings,
             CancellationToken cancellationToken = default)
         {

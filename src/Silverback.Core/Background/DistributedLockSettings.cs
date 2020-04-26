@@ -43,13 +43,15 @@ namespace Silverback.Background
         ///     The interval at which the heartbeat has to be sent (default is 1 second).
         /// </param>
         public DistributedLockSettings(
-            string? resourceName = null,
+            string resourceName = "",
             string? uniqueId = null,
             TimeSpan? acquireTimeout = null,
             TimeSpan? acquireRetryInterval = null,
             TimeSpan? heartbeatTimeout = null,
             TimeSpan? heartbeatInterval = null)
         {
+            if (string.IsNullOrEmpty(resourceName))
+                throw new ArgumentException("Value cannot be null or empty.", nameof(resourceName));
             if (heartbeatInterval >= heartbeatTimeout)
                 throw new ArgumentException("The heartbeat interval must be shorter than the timeout.");
 
@@ -75,7 +77,7 @@ namespace Silverback.Background
         /// <summary>
         ///     Gets the name of the lock / the resource being locked.
         /// </summary>
-        public string ResourceName { get; internal set; }
+        public string ResourceName { get; private set; }
 
         /// <summary>
         ///     Gets a unique identifier representing the entity trying to acquire the lock.
@@ -107,5 +109,11 @@ namespace Silverback.Background
         ///     Gets the maximum number of heartbeats that can be failed to be sent before stopping.
         /// </summary>
         public int FailedHeartbeatsThreshold { get; }
+
+        internal void EnsureResourceNameIsSet(string fallback)
+        {
+            if (string.IsNullOrEmpty(ResourceName))
+                ResourceName = fallback;
+        }
     }
 }

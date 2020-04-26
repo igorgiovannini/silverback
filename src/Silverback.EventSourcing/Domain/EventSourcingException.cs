@@ -4,44 +4,45 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace Silverback.Messaging.Batch
+namespace Silverback.Domain
 {
     /// <summary>
-    ///     The exception that is thrown when something goes wrong with the batch handling.
+    ///     The exception that is thrown when the stored events cannot be applied back to the domain
+    ///     entity.
     /// </summary>
-    public class SilverbackBatchException : SilverbackException
+    public class EventSourcingException : SilverbackException
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="SilverbackBatchException" /> class.
+        ///     Initializes a new instance of the <see cref="EventSourcingException" /> class.
         /// </summary>
-        public SilverbackBatchException()
+        public EventSourcingException()
         {
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="SilverbackBatchException" /> class with the
-        ///     specified message.
+        ///     Initializes a new instance of the <see cref="EventSourcingException" /> class with
+        ///     the specified message.
         /// </summary>
         /// <param name="message"> The exception message. </param>
-        public SilverbackBatchException(string message)
+        public EventSourcingException(string message)
             : base(message)
         {
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="SilverbackBatchException" /> class with the
-        ///     specified message and inner exception.
+        ///     Initializes a new instance of the <see cref="EventSourcingException" /> class with
+        ///     the specified message and inner exception.
         /// </summary>
         /// <param name="message"> The exception message. </param>
         /// <param name="innerException"> The inner exception. </param>
-        public SilverbackBatchException(string message, Exception innerException)
+        public EventSourcingException(string message, Exception innerException)
             : base(message, innerException)
         {
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="SilverbackBatchException" /> class with the
-        ///     serialized data.
+        ///     Initializes a new instance of the <see cref="EventSourcingException" /> class with
+        ///     the serialized data.
         /// </summary>
         /// <param name="info">
         ///     The <see cref="SerializationInfo" /> that holds the serialized object data about the exception
@@ -51,7 +52,7 @@ namespace Silverback.Messaging.Batch
         ///     The <see cref="StreamingContext" /> that contains contextual information about the source or
         ///     destination.
         /// </param>
-        public SilverbackBatchException(SerializationInfo info, StreamingContext context)
+        public EventSourcingException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }

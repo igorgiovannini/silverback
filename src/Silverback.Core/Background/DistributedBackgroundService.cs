@@ -56,7 +56,10 @@ namespace Silverback.Background
             IDistributedLockManager distributedLockManager,
             ILogger<DistributedBackgroundService> logger)
         {
-            _distributedLockSettings = distributedLockSettings ?? new DistributedLockSettings(GetType().FullName);
+            _distributedLockSettings = distributedLockSettings ?? new DistributedLockSettings();
+
+            _distributedLockSettings.EnsureResourceNameIsSet(GetType().FullName);
+
             _distributedLockManager =
                 distributedLockManager ?? throw new ArgumentNullException(nameof(distributedLockManager));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -65,7 +68,7 @@ namespace Silverback.Background
         /// <summary>
         ///     Gets the acquired <see cref="DistributedLock" />.
         /// </summary>
-        protected DistributedLock Lock { get; private set; }
+        protected DistributedLock? Lock { get; private set; }
 
         /// <inheritdoc />
         [SuppressMessage(

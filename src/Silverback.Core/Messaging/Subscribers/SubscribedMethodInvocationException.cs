@@ -38,8 +38,8 @@ namespace Silverback.Messaging.Subscribers
         /// <param name="message">The exception message.</param>
         public SubscribedMethodInvocationException(MethodInfo methodInfo, string message)
             : base(
-                $"Cannot invoke the subscribed method {methodInfo.Name} " +
-                $"in type {methodInfo.DeclaringType?.FullName}. --> " +
+                $"Cannot invoke the subscribed method '{methodInfo?.Name}' " +
+                $"in type '{methodInfo?.DeclaringType?.FullName}'. --> " +
                 message)
         {
         }

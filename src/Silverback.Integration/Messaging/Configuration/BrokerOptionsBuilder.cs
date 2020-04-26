@@ -55,8 +55,9 @@ namespace Silverback.Messaging.Configuration
                     .AddSingleton<IMessageTransformerFactory, MessageTransformerFactory>()
                     // Pipeline - Chunking
                     .AddSingletonBrokerBehavior<ChunkSplitterProducerBehavior>()
-                    .AddSingletonBrokerBehavior(serviceProvider =>
-                        serviceProvider.GetRequiredService<ChunkAggregatorConsumerBehavior>())
+                    .AddSingletonBrokerBehavior(
+                        serviceProvider =>
+                            serviceProvider.GetRequiredService<ChunkAggregatorConsumerBehavior>())
                     .AddSingletonSubscriber<ChunkAggregatorConsumerBehavior>()
                     .AddScoped<ChunkAggregator>()
                     // Pipeline - Binary File
@@ -80,8 +81,9 @@ namespace Silverback.Messaging.Configuration
             SilverbackBuilder.Services
                 .AddSingleton<IBroker, TBroker>()
                 // ReSharper disable once RedundantTypeArgumentsOfMethod
-                .AddSingleton<TBroker>(servicesProvider =>
-                    servicesProvider.GetServices<IBroker>().OfType<TBroker>().FirstOrDefault());
+                .AddSingleton<TBroker>(
+                    servicesProvider =>
+                        servicesProvider.GetServices<IBroker>().OfType<TBroker>().FirstOrDefault());
 
             FindOptionsConfigurator<TBroker>()?.Configure(this);
 
@@ -97,7 +99,7 @@ namespace Silverback.Messaging.Configuration
             if (type == null)
                 return null;
 
-            return (IBrokerOptionsConfigurator<TBroker>) Activator.CreateInstance(type);
+            return (IBrokerOptionsConfigurator<TBroker>)Activator.CreateInstance(type);
         }
 
         #endregion
@@ -219,24 +221,27 @@ namespace Silverback.Messaging.Configuration
             TimeSpan? interval = null,
             bool enforceMessageOrder = true,
             int readPackageSize = 100,
-            DistributedLockSettings distributedLockSettings = null)
+            DistributedLockSettings? distributedLockSettings = null)
         {
             distributedLockSettings ??= new DistributedLockSettings();
-            distributedLockSettings.ResourceName ??= "OutboundQueueWorker";
+            distributedLockSettings.EnsureResourceNameIsSet("OutboundQueueWorker");
 
             SilverbackBuilder.Services
-                .AddSingleton<IOutboundQueueWorker>(serviceProvider => new OutboundQueueWorker(
-                    serviceProvider.GetRequiredService<IServiceScopeFactory>(),
-                    serviceProvider.GetRequiredService<IBrokerCollection>(),
-                    serviceProvider.GetRequiredService<ILogger<OutboundQueueWorker>>(),
-                    serviceProvider.GetRequiredService<MessageLogger>(),
-                    enforceMessageOrder, readPackageSize))
-                .AddSingleton<IHostedService>(serviceProvider => new OutboundQueueWorkerService(
-                    interval ?? TimeSpan.FromMilliseconds(500),
-                    serviceProvider.GetRequiredService<IOutboundQueueWorker>(),
-                    distributedLockSettings,
-                    serviceProvider.GetService<IDistributedLockManager>() ?? new NullLockManager(),
-                    serviceProvider.GetRequiredService<ILogger<OutboundQueueWorkerService>>()));
+                .AddSingleton<IOutboundQueueWorker>(
+                    serviceProvider => new OutboundQueueWorker(
+                        serviceProvider.GetRequiredService<IServiceScopeFactory>(),
+                        serviceProvider.GetRequiredService<IBrokerCollection>(),
+                        serviceProvider.GetRequiredService<ILogger<OutboundQueueWorker>>(),
+                        serviceProvider.GetRequiredService<MessageLogger>(),
+                        enforceMessageOrder,
+                        readPackageSize))
+                .AddSingleton<IHostedService>(
+                    serviceProvider => new OutboundQueueWorkerService(
+                        interval ?? TimeSpan.FromMilliseconds(500),
+                        serviceProvider.GetRequiredService<IOutboundQueueWorker>(),
+                        distributedLockSettings,
+                        serviceProvider.GetService<IDistributedLockManager>() ?? new NullLockManager(),
+                        serviceProvider.GetRequiredService<ILogger<OutboundQueueWorkerService>>()));
 
             return this;
         }
@@ -294,20 +299,22 @@ namespace Silverback.Messaging.Configuration
             where TStore : class, IChunkStore
         {
             distributedLockSettings ??= new DistributedLockSettings();
-            distributedLockSettings.ResourceName ??= "ChunkStoreCleaner";
-            
+            distributedLockSettings.EnsureResourceNameIsSet("ChunkStoreCleaner");
+
             SilverbackBuilder.Services
                 .AddScoped<IChunkStore, TStore>()
-                .AddSingleton(serviceProvider => new ChunkStoreCleaner(
-                    retention ?? TimeSpan.FromDays(1),
-                    serviceProvider.GetRequiredService<IServiceScopeFactory>(),
-                    serviceProvider.GetRequiredService<ILogger<ChunkStoreCleaner>>()))
-                .AddSingleton<IHostedService>(serviceProvider => new ChunkStoreCleanerService(
-                    cleanupInterval ?? TimeSpan.FromMinutes(10),
-                    serviceProvider.GetRequiredService<ChunkStoreCleaner>(),
-                    distributedLockSettings,
-                    serviceProvider.GetService<IDistributedLockManager>() ?? new NullLockManager(),
-                    serviceProvider.GetRequiredService<ILogger<ChunkStoreCleanerService>>()));
+                .AddSingleton(
+                    serviceProvider => new ChunkStoreCleaner(
+                        retention ?? TimeSpan.FromDays(1),
+                        serviceProvider.GetRequiredService<IServiceScopeFactory>(),
+                        serviceProvider.GetRequiredService<ILogger<ChunkStoreCleaner>>()))
+                .AddSingleton<IHostedService>(
+                    serviceProvider => new ChunkStoreCleanerService(
+                        cleanupInterval ?? TimeSpan.FromMinutes(10),
+                        serviceProvider.GetRequiredService<ChunkStoreCleaner>(),
+                        distributedLockSettings,
+                        serviceProvider.GetService<IDistributedLockManager>() ?? new NullLockManager(),
+                        serviceProvider.GetRequiredService<ILogger<ChunkStoreCleanerService>>()));
 
             return this;
         }
@@ -389,8 +396,7 @@ namespace Silverback.Messaging.Configuration
             return this;
         }
 
-        public IBrokerOptionsBuilder AddSingletonBrokerBehavior(
-            IBrokerBehavior implementationInstance)
+        public IBrokerOptionsBuilder AddSingletonBrokerBehavior(IBrokerBehavior implementationInstance)
         {
             SilverbackBuilder.Services.AddSingletonBrokerBehavior(implementationInstance);
             return this;
@@ -420,8 +426,7 @@ namespace Silverback.Messaging.Configuration
             return this;
         }
 
-        public IBrokerOptionsBuilder AddSingletonOutboundRouter(
-            IOutboundRouter implementationInstance)
+        public IBrokerOptionsBuilder AddSingletonOutboundRouter(IOutboundRouter implementationInstance)
         {
             SilverbackBuilder.Services.AddSingletonOutboundRouter(implementationInstance);
             return this;

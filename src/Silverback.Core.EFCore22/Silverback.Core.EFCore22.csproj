@@ -34,11 +34,11 @@ This package It contains the storage implementation to integrate Silverback with
     <Compile Include="..\Silverback.Core.EFCore30\Database\SilverbackBuilderExtensions.cs">
       <Link>Database\DependencyInjectionExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\Silverback.Core.EFCore30\Database\EfCoreDbContext.cs">
-      <Link>Database\EfCoreDbContext.cs</Link>
+    <Compile Include="..\Silverback.Core.EFCore30\Database\EfCoreDbContext`1.cs">
+      <Link>Database\EfCoreDbContext`1.cs</Link>
     </Compile>
-    <Compile Include="..\Silverback.Core.EFCore30\Database\EfCoreDbSet.cs">
-      <Link>Database\EfCoreDbSet.cs</Link>
+    <Compile Include="..\Silverback.Core.EFCore30\Database\EfCoreDbSet`1.cs">
+      <Link>Database\EfCoreDbSet`1.cs</Link>
     </Compile>
     <Compile Include="..\Silverback.Core.EFCore30\Database\EfCoreQueryableExtensions.cs">
       <Link>Database\EfCoreQueryableExtensions.cs</Link>

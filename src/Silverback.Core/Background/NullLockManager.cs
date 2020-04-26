@@ -15,10 +15,10 @@ namespace Silverback.Background
     public class NullLockManager : IDistributedLockManager
     {
         /// <inheritdoc />
-        public Task<DistributedLock> Acquire(
+        public Task<DistributedLock?> Acquire(
             DistributedLockSettings settings,
             CancellationToken cancellationToken = default) =>
-            Task.FromResult<DistributedLock>(null);
+            Task.FromResult<DistributedLock?>(null);
 
         /// <inheritdoc />
         public Task<bool> CheckIsStillLocked(DistributedLockSettings settings) =>

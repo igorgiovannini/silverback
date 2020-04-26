@@ -6,24 +6,24 @@ using System.Runtime.Serialization;
 
 namespace Silverback.Messaging.Configuration
 {
-    public class SilverbackConfigurationException : SilverbackException
+    public class ConfigurationException : SilverbackException
     {
-        public SilverbackConfigurationException()
+        public ConfigurationException()
         {
         }
 
-        public SilverbackConfigurationException(string message)
+        public ConfigurationException(string message)
             : base(message)
         {
         }
 
-        public SilverbackConfigurationException(string message, Exception innerException)
+        public ConfigurationException(string message, Exception innerException)
             : base(message,
                 innerException)
         {
         }
 
-        protected SilverbackConfigurationException(SerializationInfo info, StreamingContext context)
+        protected ConfigurationException(SerializationInfo info, StreamingContext context)
             : base(info,
                 context)
         {

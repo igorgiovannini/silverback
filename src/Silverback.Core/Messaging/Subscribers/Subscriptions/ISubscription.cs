@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace Silverback.Messaging.Subscribers.Subscriptions
 {
     /// <summary>
-    ///     Represents a subscription configuration. Each subscription can resolve to multiple <see cref="SubscribedMethod"/>. 
+    ///     Represents a subscription configuration. Each subscription can resolve to multiple <see cref="SubscribedMethod"/>.
     /// </summary>
     public interface ISubscription
     {

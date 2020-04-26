@@ -30,9 +30,9 @@ namespace Silverback.Messaging.Subscribers.ReturnValueHandlers
                          messageType.IsAssignableFrom(i.GenericTypeArguments[0])));
 
         public void Handle(object returnValue) =>
-            _publisher.Publish<object>((IReadOnlyCollection<object>) returnValue);
+            _publisher.Publish<object>((IReadOnlyCollection<object>)returnValue);
 
         public Task HandleAsync(object returnValue) =>
-            _publisher.PublishAsync<object>((IReadOnlyCollection<object>) returnValue);
+            _publisher.PublishAsync<object>((IReadOnlyCollection<object>)returnValue);
     }
 }

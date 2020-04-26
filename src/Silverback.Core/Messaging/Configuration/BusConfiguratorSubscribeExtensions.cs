@@ -156,7 +156,7 @@ namespace Silverback.Messaging.Configuration
         public static IBusConfigurator Subscribe<TMessage>(
             this IBusConfigurator busConfigurator,
             Func<TMessage, Task<object>> handler,
-            SubscriptionOptions options = null)
+            SubscriptionOptions? options = null)
         {
             if (busConfigurator == null)
                 throw new ArgumentNullException(nameof(busConfigurator));
@@ -187,7 +187,7 @@ namespace Silverback.Messaging.Configuration
         public static IBusConfigurator Subscribe<TMessage>(
             this IBusConfigurator busConfigurator,
             Action<IEnumerable<TMessage>> handler,
-            SubscriptionOptions options = null)
+            SubscriptionOptions? options = null)
         {
             if (busConfigurator == null)
                 throw new ArgumentNullException(nameof(busConfigurator));
@@ -218,7 +218,7 @@ namespace Silverback.Messaging.Configuration
         public static IBusConfigurator Subscribe<TMessage>(
             this IBusConfigurator busConfigurator,
             Func<IReadOnlyCollection<TMessage>, Task> handler,
-            SubscriptionOptions options = null)
+            SubscriptionOptions? options = null)
         {
             if (busConfigurator == null)
                 throw new ArgumentNullException(nameof(busConfigurator));
@@ -249,7 +249,7 @@ namespace Silverback.Messaging.Configuration
         public static IBusConfigurator Subscribe<TMessage>(
             this IBusConfigurator busConfigurator,
             Func<IReadOnlyCollection<TMessage>, object> handler,
-            SubscriptionOptions options = null)
+            SubscriptionOptions? options = null)
         {
             if (busConfigurator == null)
                 throw new ArgumentNullException(nameof(busConfigurator));
@@ -280,7 +280,7 @@ namespace Silverback.Messaging.Configuration
         public static IBusConfigurator Subscribe<TMessage>(
             this IBusConfigurator busConfigurator,
             Func<IReadOnlyCollection<TMessage>, Task<object>> handler,
-            SubscriptionOptions options = null)
+            SubscriptionOptions? options = null)
         {
             if (busConfigurator == null)
                 throw new ArgumentNullException(nameof(busConfigurator));
@@ -311,7 +311,7 @@ namespace Silverback.Messaging.Configuration
         public static IBusConfigurator Subscribe<TMessage>(
             this IBusConfigurator busConfigurator,
             Action<TMessage, IServiceProvider> handler,
-            SubscriptionOptions options = null)
+            SubscriptionOptions? options = null)
         {
             if (busConfigurator == null)
                 throw new ArgumentNullException(nameof(busConfigurator));
@@ -342,7 +342,7 @@ namespace Silverback.Messaging.Configuration
         public static IBusConfigurator Subscribe<TMessage>(
             this IBusConfigurator busConfigurator,
             Func<TMessage, IServiceProvider, object> handler,
-            SubscriptionOptions options = null)
+            SubscriptionOptions? options = null)
         {
             if (busConfigurator == null)
                 throw new ArgumentNullException(nameof(busConfigurator));
@@ -373,7 +373,7 @@ namespace Silverback.Messaging.Configuration
         public static IBusConfigurator Subscribe<TMessage>(
             this IBusConfigurator busConfigurator,
             Action<IEnumerable<TMessage>, IServiceProvider> handler,
-            SubscriptionOptions options = null)
+            SubscriptionOptions? options = null)
         {
             if (busConfigurator == null)
                 throw new ArgumentNullException(nameof(busConfigurator));
@@ -404,7 +404,7 @@ namespace Silverback.Messaging.Configuration
         public static IBusConfigurator Subscribe<TMessage>(
             this IBusConfigurator busConfigurator,
             Func<IReadOnlyCollection<TMessage>, IServiceProvider, object> handler,
-            SubscriptionOptions options = null)
+            SubscriptionOptions? options = null)
         {
             if (busConfigurator == null)
                 throw new ArgumentNullException(nameof(busConfigurator));

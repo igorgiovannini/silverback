@@ -86,7 +86,7 @@ namespace Silverback.Messaging.Batch
             // TODO: Check this!
             if (_processingException != null)
             {
-                throw new SilverbackBatchException(
+                throw new BatchException(
                     "Cannot add to the batch because the processing of the previous " +
                     "batch failed. See inner exception for details.",
                     _processingException);
@@ -159,7 +159,7 @@ namespace Silverback.Messaging.Batch
             catch (Exception ex)
             {
                 _processingException = ex;
-                throw new SilverbackBatchException("Failed to process batch. See inner exception for details.", ex);
+                throw new BatchException("Failed to process batch. See inner exception for details.", ex);
             }
         }
 

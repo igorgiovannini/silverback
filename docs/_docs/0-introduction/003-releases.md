@@ -18,6 +18,7 @@ toc: true
 
 * `BusConfigurator` replaced by `IBusConfigurator`
 * The visibility of some types has been changed to internal to favor a cleaner and clearer API where the public types are well documented and their backward compatibility is valued
+* Removed `Silverback` prefix from exceptions name
 
 ## [2.1.0-rc6](https://github.com/BEagle1984/silverback/releases/tag/2.1.0-rc6)
 

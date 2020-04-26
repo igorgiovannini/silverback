@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Silverback.Messaging.Configuration;
 using Silverback.Messaging.Publishing;
+using Silverback.Util;
 
 namespace Silverback.Messaging.Subscribers.ReturnValueHandlers
 {
@@ -30,9 +31,9 @@ namespace Silverback.Messaging.Subscribers.ReturnValueHandlers
                          messageType.IsAssignableFrom(i.GenericTypeArguments[0])));
 
         public void Handle(object returnValue) =>
-            _publisher.Publish<object>((IEnumerable<object>) returnValue);
+            _publisher.Publish<object?>(((IEnumerable<object?>)returnValue).WhereNotNull());
 
         public Task HandleAsync(object returnValue) =>
-            _publisher.PublishAsync<object>((IEnumerable<object>) returnValue);
+            _publisher.PublishAsync<object>(((IEnumerable<object?>)returnValue).WhereNotNull());
     }
 }
