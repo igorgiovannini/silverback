@@ -13,7 +13,7 @@ namespace Silverback.Messaging.Subscribers.ArgumentResolvers
     {
         /// <summary>
         ///     Returns a boolean value indicating whether this resolver instance can handle the parameter of the
-        ///     specified type. 
+        ///     specified type.
         /// </summary>
         /// <param name="parameterType">The type of the parameter to be resolved.</param>
         /// <returns>A boolean value indicating whether the specified parameter type can be handled.</returns>

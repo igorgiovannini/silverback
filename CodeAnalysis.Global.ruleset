@@ -768,12 +768,13 @@
         <Rule Id="SA1133" Action="None" /> <!-- SA1133DoNotCombineAttributes -->
         <Rule Id="SA1204" Action="None" /> <!-- StaticElementsMustAppearBeforeInstanceElements -->
         <Rule Id="SA1309" Action="None" /> <!-- FieldNamesMustNotBeginWithUnderscore -->
+        <Rule Id="SA1408" Action="None" /> <!-- SA1408ConditionalExpressionsMustDeclarePrecedence: doesn't seem to be compatible with Rider's/ReSharper's cleanup -->
         <Rule Id="SA1413" Action="None" /> <!-- UseTrailingCommasInMultiLineInitializers -->
+        <Rule Id="SA1503" Action="None" /> <!-- BracesMustNotBeOmitted -->
         <Rule Id="SA1600" Action="Warning" /> <!-- ElementsMustBeDocumented -->
         <Rule Id="SA1602" Action="Warning" /> <!-- SA1602EnumerationItemsMustBeDocumented -->
         <Rule Id="SA1611" Action="Warning" /> <!-- ElementParametersMustBeDocumented -->
         <Rule Id="SA1623" Action="Warning" /> <!-- SA1623PropertySummaryDocumentationMustMatchAccessors -->
         <Rule Id="SA1633" Action="Warning" /> <!-- FileMustHaveHeader -->
-        <Rule Id="SA1503" Action="None" /> <!-- BracesMustNotBeOmitted -->
     </Rules>
 </RuleSet>

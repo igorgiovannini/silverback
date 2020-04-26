@@ -3,6 +3,9 @@
 
 namespace Silverback.Messaging.Subscribers
 {
+    /// <summary>
+    ///     Filters the messages to be processed.
+    /// </summary>
     public interface IMessageFilter
     {
         /// <summary>

@@ -19,11 +19,6 @@ namespace Silverback.Messaging.Subscribers.ArgumentResolvers
             _argumentResolvers = argumentResolvers.Reverse();
         }
 
-        private MessageFilterAttribute GetRat()
-        {
-            return null!;
-        }
-
         public (IMessageArgumentResolver resolver, Type messageType) GetMessageArgumentResolver(
             SubscribedMethod methodInfo)
         {
@@ -36,39 +31,38 @@ namespace Silverback.Messaging.Subscribers.ArgumentResolvers
 
         public IEnumerable<object?> GetAdditionalParameterValues(SubscribedMethod methodInfo)
         {
-            return methodInfo.Parameters
-                .Skip(1)
-                .Select(
-                    parameterInfo =>
-                        GetAdditionalArgumentResolver(parameterInfo, methodInfo.MethodInfo)
-                            .GetValue(parameterInfo.ParameterType))
-                .ToArray();
+            for (int i = 1; i < methodInfo.Parameters.Count; i++)
+            {
+                var parameterInfo = methodInfo.Parameters[i];
+
+                yield return GetAdditionalArgumentResolver(parameterInfo, methodInfo.MethodInfo)
+                    .GetValue(parameterInfo.ParameterType);
+            }
         }
 
-        private IMessageArgumentResolver
-            GetMessageArgumentResolver(ParameterInfo parameterInfo, MethodInfo methodInfo)
-        {
-            return GetArgumentResolver<IMessageArgumentResolver>(parameterInfo, methodInfo);
-        }
+        private IMessageArgumentResolver GetMessageArgumentResolver(
+            ParameterInfo parameterInfo,
+            MethodInfo methodInfo) =>
+            GetArgumentResolver<IMessageArgumentResolver>(parameterInfo, methodInfo);
 
-        private IAdditionalArgumentResolver GetAdditionalArgumentResolver(ParameterInfo parameterInfo,
-            MethodInfo methodInfo)
-        {
-            return GetArgumentResolver<IAdditionalArgumentResolver>(parameterInfo, methodInfo);
-        }
+        private IAdditionalArgumentResolver GetAdditionalArgumentResolver(
+            ParameterInfo parameterInfo,
+            MethodInfo methodInfo) =>
+            GetArgumentResolver<IAdditionalArgumentResolver>(parameterInfo, methodInfo);
 
         private TResolver GetArgumentResolver<TResolver>(ParameterInfo parameterInfo, MethodInfo methodInfo)
             where TResolver : IArgumentResolver
         {
-            TResolver resolver = _argumentResolvers
+            var resolver = _argumentResolvers
                 .OfType<TResolver>()
                 .FirstOrDefault(r => r.CanResolve(parameterInfo.ParameterType));
 
             if (resolver == null)
             {
-                throw new SubscribedMethodInvocationException(
-                    methodInfo,
-                    $"No resolver could be found for argument '{parameterInfo.Name}' of type {parameterInfo.ParameterType.FullName}.");
+                var errorMessage = $"No resolver could be found for argument '{parameterInfo.Name}' " +
+                                   $"of type {parameterInfo.ParameterType.FullName}.";
+
+                throw new SubscribedMethodInvocationException(methodInfo, errorMessage);
             }
 
             return resolver;

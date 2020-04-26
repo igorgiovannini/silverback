@@ -7,8 +7,7 @@ namespace Silverback.Messaging.Subscribers.ArgumentResolvers
 {
     /// <summary>
     ///     These resolvers are used to cast or transform the message parameter to be forwarded to the
-    ///     subscribed
-    ///     method.
+    ///     subscribed method.
     /// </summary>
     public interface IMessageArgumentResolver : IArgumentResolver
     {

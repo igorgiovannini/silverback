@@ -4,6 +4,20 @@ permalink: /docs/releases
 toc: true
 ---
 
+## 3.0.0
+
+### What's new
+
+* Improved code quality (xml documentation, pipeline, analyzers, ...)
+* Decorated nullable reference types
+* Improved performance (show benchmarks)
+
+### Fixes
+
+### Breaking Changes
+
+* `BusConfigurator` replaced by `IBusConfigurator`
+
 ## [2.1.0-rc6](https://github.com/BEagle1984/silverback/releases/tag/2.1.0-rc6)
 
 ### What's new

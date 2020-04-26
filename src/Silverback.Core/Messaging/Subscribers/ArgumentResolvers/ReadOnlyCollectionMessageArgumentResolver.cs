@@ -7,7 +7,7 @@ using Silverback.Util;
 
 namespace Silverback.Messaging.Subscribers.ArgumentResolvers
 {
-    public class ReadOnlyCollectionMessageArgumentResolver : IEnumerableMessageArgumentResolver
+    internal class ReadOnlyCollectionMessageArgumentResolver : IEnumerableMessageArgumentResolver
     {
         public bool CanResolve(Type parameterType) =>
             parameterType.IsGenericType &&

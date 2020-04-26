@@ -10,37 +10,62 @@ using Silverback.Util;
 
 namespace Silverback.Messaging.Configuration
 {
+    /// <summary>
+    ///     Adds the <c> Connect </c> method to the <see cref="IBusConfigurator" />.
+    /// </summary>
     public static class BusConfiguratorExtensions
     {
         /// <summary>
         ///     Configures the message broker endpoints and start consuming.
         /// </summary>
-        /// <param name="configurator"></param>
-        /// <returns></returns>
-        public static IBrokerCollection Connect(this BusConfigurator configurator) =>
-            Connect(configurator, null);
+        /// <param name="busConfigurator">
+        ///     The <see cref="IBusConfigurator" /> that references the internal bus.
+        /// </param>
+        /// <returns>
+        ///     An <see cref="IBrokerCollection" /> collection containing the broker instances that have been
+        ///     connected.
+        /// </returns>
+        public static IBrokerCollection Connect(this IBusConfigurator busConfigurator) =>
+            Connect(busConfigurator, null);
 
         /// <summary>
         ///     Configures the message broker endpoints and start consuming.
         /// </summary>
-        /// <param name="configurator"></param>
-        /// <param name="endpointsConfigurationAction">The inbound/outbound endpoints configuration action.</param>
-        /// <returns></returns>
+        /// <param name="busConfigurator">
+        ///     The <see cref="IBusConfigurator" /> that references the internal bus.
+        /// </param>
+        /// <param name="endpointsConfigurationAction">
+        ///     The inbound/outbound endpoints configuration action.
+        /// </param>
+        /// <returns>
+        ///     An <see cref="IBrokerCollection" /> collection containing the broker instances that have been
+        ///     connected.
+        /// </returns>
         public static IBrokerCollection Connect(
-            this BusConfigurator configurator,
+            this IBusConfigurator busConfigurator,
             Action<IEndpointsConfigurationBuilder> endpointsConfigurationAction)
         {
+            if (busConfigurator == null)
+                throw new ArgumentNullException(nameof(busConfigurator));
+
+            var outboundRoutingConfiguration =
+                busConfigurator.ServiceProvider.GetRequiredService<IOutboundRoutingConfiguration>();
+            var inboundConnectors =
+                busConfigurator.ServiceProvider.GetRequiredService<IEnumerable<IInboundConnector>>();
+            var errorPolicyBuilder =
+                busConfigurator.ServiceProvider.GetRequiredService<ErrorPolicyBuilder>();
+
             var endpointsConfigurationBuilder = new EndpointsConfigurationBuilder(
-                configurator.ServiceProvider.GetRequiredService<IOutboundRoutingConfiguration>(),
-                configurator.ServiceProvider.GetRequiredService<IEnumerable<IInboundConnector>>(),
-                configurator.ServiceProvider.GetRequiredService<ErrorPolicyBuilder>(),
-                configurator.ServiceProvider);
+                outboundRoutingConfiguration,
+                inboundConnectors,
+                errorPolicyBuilder,
+                busConfigurator.ServiceProvider);
             endpointsConfigurationAction?.Invoke(endpointsConfigurationBuilder);
 
-            configurator.ServiceProvider.GetServices<IEndpointsConfigurator>().ForEach(c =>
-                c.Configure(endpointsConfigurationBuilder));
+            busConfigurator.ServiceProvider.GetServices<IEndpointsConfigurator>()
+                .ForEach(endpointsConfigurator => endpointsConfigurator.Configure(endpointsConfigurationBuilder));
 
-            var brokers = configurator.ServiceProvider.GetRequiredService<IBrokerCollection>();
+            var brokers = busConfigurator.ServiceProvider.GetRequiredService<IBrokerCollection>();
 
             brokers.Connect();
 

@@ -10,7 +10,7 @@ using Silverback.Messaging.Publishing;
 namespace Silverback.Messaging.Subscribers.ReturnValueHandlers
 {
     // TODO: Test
-    public class EnumerableMessagesReturnValueHandler : IReturnValueHandler
+    internal class EnumerableMessagesReturnValueHandler : IReturnValueHandler
     {
         private readonly IPublisher _publisher;
         private readonly BusOptions _publisherOptions;

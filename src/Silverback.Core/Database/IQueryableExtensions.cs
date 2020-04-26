@@ -95,6 +95,7 @@ namespace Silverback.Database
             CancellationToken cancellationToken);
 
         Task<decimal> SumAsync(IQueryable<decimal> source, CancellationToken cancellationToken);
+
         Task<decimal?> SumAsync(IQueryable<decimal?> source, CancellationToken cancellationToken);
 
         Task<decimal> SumAsync<TSource>(
@@ -108,6 +109,7 @@ namespace Silverback.Database
             CancellationToken cancellationToken);
 
         Task<int> SumAsync(IQueryable<int> source, CancellationToken cancellationToken);
+
         Task<int?> SumAsync(IQueryable<int?> source, CancellationToken cancellationToken);
 
         Task<int> SumAsync<TSource>(
@@ -121,6 +123,7 @@ namespace Silverback.Database
             CancellationToken cancellationToken);
 
         Task<long> SumAsync(IQueryable<long> source, CancellationToken cancellationToken);
+
         Task<long?> SumAsync(IQueryable<long?> source, CancellationToken cancellationToken);
 
         Task<long> SumAsync<TSource>(
@@ -134,6 +137,7 @@ namespace Silverback.Database
             CancellationToken cancellationToken);
 
         Task<double> SumAsync(IQueryable<double> source, CancellationToken cancellationToken);
+
         Task<double?> SumAsync(IQueryable<double?> source, CancellationToken cancellationToken);
 
         Task<double> SumAsync<TSource>(
@@ -147,6 +151,7 @@ namespace Silverback.Database
             CancellationToken cancellationToken);
 
         Task<float> SumAsync(IQueryable<float> source, CancellationToken cancellationToken);
+
         Task<float?> SumAsync(IQueryable<float?> source, CancellationToken cancellationToken);
 
         Task<float> SumAsync<TSource>(
@@ -160,6 +165,7 @@ namespace Silverback.Database
             CancellationToken cancellationToken);
 
         Task<decimal> AverageAsync(IQueryable<decimal> source, CancellationToken cancellationToken);
+
         Task<decimal?> AverageAsync(IQueryable<decimal?> source, CancellationToken cancellationToken);
 
         Task<decimal> AverageAsync<TSource>(
@@ -173,6 +179,7 @@ namespace Silverback.Database
             CancellationToken cancellationToken);
 
         Task<double> AverageAsync(IQueryable<int> source, CancellationToken cancellationToken);
+
         Task<double?> AverageAsync(IQueryable<int?> source, CancellationToken cancellationToken);
 
         Task<double> AverageAsync<TSource>(
@@ -186,6 +193,7 @@ namespace Silverback.Database
             CancellationToken cancellationToken);
 
         Task<double> AverageAsync(IQueryable<long> source, CancellationToken cancellationToken);
+
         Task<double?> AverageAsync(IQueryable<long?> source, CancellationToken cancellationToken);
 
         Task<double> AverageAsync<TSource>(
@@ -199,6 +207,7 @@ namespace Silverback.Database
             CancellationToken cancellationToken);
 
         Task<double> AverageAsync(IQueryable<double> source, CancellationToken cancellationToken);
+
         Task<double?> AverageAsync(IQueryable<double?> source, CancellationToken cancellationToken);
 
         Task<double> AverageAsync<TSource>(
@@ -212,6 +221,7 @@ namespace Silverback.Database
             CancellationToken cancellationToken);
 
         Task<float> AverageAsync(IQueryable<float> source, CancellationToken cancellationToken);
+
         Task<float?> AverageAsync(IQueryable<float?> source, CancellationToken cancellationToken);
 
         Task<float> AverageAsync<TSource>(
@@ -230,6 +240,7 @@ namespace Silverback.Database
             CancellationToken cancellationToken);
 
         Task<List<TSource>> ToListAsync<TSource>(IQueryable<TSource> source, CancellationToken cancellationToken);
+
         Task<TSource[]> ToArrayAsync<TSource>(IQueryable<TSource> source, CancellationToken cancellationToken);
 
         IQueryable<TEntity> Include<TEntity, TProperty>(
@@ -250,6 +261,7 @@ namespace Silverback.Database
             where TEntity : class;
 
         void Load<TSource>(IQueryable<TSource> source);
+
         Task LoadAsync<TSource>(IQueryable<TSource> source, CancellationToken cancellationToken = default);
 
         Task<Dictionary<TKey, TSource>> ToDictionaryAsync<TSource, TKey>(

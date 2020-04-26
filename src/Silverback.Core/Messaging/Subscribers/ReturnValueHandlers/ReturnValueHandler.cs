@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace Silverback.Messaging.Subscribers.ReturnValueHandlers
 {
-    public class ReturnValueHandler
+    // TODO: Test
+    internal class ReturnValueHandler
     {
         private readonly IReadOnlyCollection<IReturnValueHandler> _returnValueHandlers;
 

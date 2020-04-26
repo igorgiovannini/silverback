@@ -9,7 +9,7 @@ using Silverback.Messaging.Configuration;
 namespace Microsoft.Extensions.DependencyInjection
 {
     /// <summary>
-    ///     Adds the <c>AddDbDistributedLockManager</c> extension method to <see cref="ISilverbackBuilder"/>.
+    ///     Adds the <c>AddDbDistributedLockManager</c> method to the <see cref="ISilverbackBuilder"/>.
     /// </summary>
     public static class SilverbackBuilderExtensions
     {

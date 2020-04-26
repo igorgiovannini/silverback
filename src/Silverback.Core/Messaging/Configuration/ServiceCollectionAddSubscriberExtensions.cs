@@ -2,21 +2,24 @@
 // This code is licensed under MIT license (see LICENSE file for details)
 
 using System;
-using Silverback.Messaging.Publishing;
+using Silverback.Messaging.Configuration;
 using Silverback.Messaging.Subscribers;
 
 // ReSharper disable once CheckNamespace
 namespace Microsoft.Extensions.DependencyInjection
 {
-    public static class ServiceCollectionExtensions
+    /// <summary>
+    ///     Adds the <c> AddTransientSubscriber </c>, <c> AddScopedSubscriber </c> and
+    ///     <c> AddSingletonSubscriber </c> methods to the <see cref="ISilverbackBuilder" />.
+    /// </summary>
+    public static class ServiceCollectionAddSubscriberExtensions
     {
         /// <summary>
         ///     Adds a scoped subscriber of the type specified in <paramref name="subscriberType" /> to the
-        ///     specified <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
+        ///     <see cref="IServiceCollection" />.
         /// </summary>
         /// <param name="services">
-        ///     The <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" /> to add the
-        ///     service to.
+        ///     The <see cref="IServiceCollection" /> to add the subscriber to.
         /// </param>
         /// <param name="baseType">
         ///     The subscribers base class or interface.
@@ -671,6 +674,9 @@ namespace Microsoft.Extensions.DependencyInjection
         ///     instance specified in <paramref name="implementationInstance" /> to the
         ///     specified <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
         /// </summary>
+        /// <typeparam name="TSubscriber">
+        ///     The type of the subscriber to register.
+        /// </typeparam>
         /// <param name="services">
         ///     The <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" /> to add the
         ///     service to.
@@ -684,225 +690,5 @@ namespace Microsoft.Extensions.DependencyInjection
             TSubscriber implementationInstance)
             where TSubscriber : class, ISubscriber =>
             AddSingletonSubscriber(services, typeof(ISubscriber), typeof(TSubscriber), implementationInstance);
-
-        /// <summary>
-        ///     Adds a scoped behavior of the type specified in <paramref name="behaviorType" /> to the
-        ///     specified <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
-        /// </summary>
-        /// <param name="services">
-        ///     The <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" /> to add the
-        ///     service to.
-        /// </param>
-        /// <param name="behaviorType">
-        ///     The type of the behavior to register and the implementation to use.
-        /// </param>
-        /// <returns>
-        ///     The <see cref="IServiceCollection" /> so that additional calls can be chained.
-        /// </returns>
-        public static IServiceCollection AddTransientBehavior(this IServiceCollection services, Type behaviorType)
-        {
-            if (behaviorType == null)
-                throw new ArgumentNullException(nameof(behaviorType));
-
-            services.AddTransient(typeof(IBehavior), behaviorType);
-
-            return services;
-        }
-
-        /// <summary>
-        ///     Adds a scoped behavior of the type specified in <typeparamref name="TBehavior" /> to the
-        ///     specified <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
-        /// </summary>
-        /// <typeparam name="TBehavior"> The type of the behavior to add. </typeparam>
-        /// <param name="services">
-        ///     The <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" /> to add the
-        ///     service to.
-        /// </param>
-        /// <returns>
-        ///     The <see cref="IServiceCollection" /> so that additional calls can be chained.
-        /// </returns>
-        public static IServiceCollection AddTransientBehavior<TBehavior>(this IServiceCollection services)
-            where TBehavior : class, IBehavior =>
-            AddTransientBehavior(services, typeof(TBehavior));
-
-        /// <summary>
-        ///     Adds a scoped behavior with a
-        ///     factory specified in <paramref name="implementationFactory" /> to the
-        ///     specified <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
-        /// </summary>
-        /// <param name="services">
-        ///     The <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" /> to add the
-        ///     service to.
-        /// </param>
-        /// <param name="implementationFactory"> The factory that creates the service. </param>
-        /// <returns>
-        ///     The <see cref="IServiceCollection" /> so that additional calls can be chained.
-        /// </returns>
-        public static IServiceCollection AddTransientBehavior(
-            this IServiceCollection services,
-            Func<IServiceProvider, IBehavior> implementationFactory)
-        {
-            if (implementationFactory == null)
-                throw new ArgumentNullException(nameof(implementationFactory));
-
-            services.AddTransient(typeof(IBehavior), implementationFactory);
-
-            return services;
-        }
-
-        /// <summary>
-        ///     Adds a scoped behavior of the type specified in <paramref name="behaviorType" /> to the
-        ///     specified <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
-        /// </summary>
-        /// <param name="services">
-        ///     The <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" /> to add the
-        ///     service to.
-        /// </param>
-        /// <param name="behaviorType">
-        ///     The type of the behavior to register and the implementation to use.
-        /// </param>
-        /// <returns>
-        ///     The <see cref="IServiceCollection" /> so that additional calls can be chained.
-        /// </returns>
-        public static IServiceCollection AddScopedBehavior(this IServiceCollection services, Type behaviorType)
-        {
-            if (behaviorType == null)
-                throw new ArgumentNullException(nameof(behaviorType));
-
-            services.AddScoped(typeof(IBehavior), behaviorType);
-
-            return services;
-        }
-
-        /// <summary>
-        ///     Adds a scoped behavior of the type specified in <typeparamref name="TBehavior" /> to the
-        ///     specified <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
-        /// </summary>
-        /// <param name="services">
-        ///     The <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" /> to add the
-        ///     service to.
-        /// </param>
-        /// <typeparam name="TBehavior"> The type of the behavior to add. </typeparam>
-        /// <returns>
-        ///     The <see cref="IServiceCollection" /> so that additional calls can be chained.
-        /// </returns>
-        public static IServiceCollection AddScopedBehavior<TBehavior>(this IServiceCollection services)
-            where TBehavior : class, IBehavior =>
-            AddScopedBehavior(services, typeof(TBehavior));
-
-        /// <summary>
-        ///     Adds a scoped behavior with a
-        ///     factory specified in <paramref name="implementationFactory" /> to the
-        ///     specified <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
-        /// </summary>
-        /// <param name="services">
-        ///     The <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" /> to add the
-        ///     service to.
-        /// </param>
-        /// <param name="implementationFactory"> The factory that creates the service. </param>
-        /// <returns>
-        ///     The <see cref="IServiceCollection" /> so that additional calls can be chained.
-        /// </returns>
-        public static IServiceCollection AddScopedBehavior(
-            this IServiceCollection services,
-            Func<IServiceProvider, IBehavior> implementationFactory)
-        {
-            if (implementationFactory == null)
-                throw new ArgumentNullException(nameof(implementationFactory));
-
-            services.AddScoped(typeof(IBehavior), implementationFactory);
-
-            return services;
-        }
-
-        /// <summary>
-        ///     Adds a singleton behavior of the type specified in <paramref name="behaviorType" /> to the
-        ///     specified <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
-        /// </summary>
-        /// <param name="services">
-        ///     The <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" /> to add the
-        ///     service to.
-        /// </param>
-        /// <param name="behaviorType">
-        ///     The type of the behavior to register and the implementation to use.
-        /// </param>
-        /// <returns>
-        ///     The <see cref="IServiceCollection" /> so that additional calls can be chained.
-        /// </returns>
-        public static IServiceCollection AddSingletonBehavior(this IServiceCollection services, Type behaviorType)
-        {
-            if (behaviorType == null)
-                throw new ArgumentNullException(nameof(behaviorType));
-
-            services.AddSingleton(typeof(IBehavior), behaviorType);
-
-            return services;
-        }
-
-        /// <summary>
-        ///     Adds a singleton behavior of the type specified in <typeparamref name="TBehavior" /> to the
-        ///     specified <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
-        /// </summary>
-        /// <typeparam name="TBehavior"> The type of the behavior to add. </typeparam>
-        /// <param name="services">
-        ///     The <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" /> to add the
-        ///     service to.
-        /// </param>
-        /// <returns>
-        ///     The <see cref="IServiceCollection" /> so that additional calls can be chained.
-        /// </returns>
-        public static IServiceCollection AddSingletonBehavior<TBehavior>(this IServiceCollection services)
-            where TBehavior : class, IBehavior =>
-            AddSingletonBehavior(services, typeof(TBehavior));
-
-        /// <summary>
-        ///     Adds a singleton behavior with a
-        ///     factory specified in <paramref name="implementationFactory" /> to the
-        ///     specified <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
-        /// </summary>
-        /// <param name="services">
-        ///     The <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" /> to add the
-        ///     service to.
-        /// </param>
-        /// <param name="implementationFactory"> The factory that creates the service. </param>
-        /// <returns>
-        ///     The <see cref="IServiceCollection" /> so that additional calls can be chained.
-        /// </returns>
-        public static IServiceCollection AddSingletonBehavior(
-            this IServiceCollection services,
-            Func<IServiceProvider, IBehavior> implementationFactory)
-        {
-            if (implementationFactory == null)
-                throw new ArgumentNullException(nameof(implementationFactory));
-
-            services.AddSingleton(typeof(IBehavior), implementationFactory);
-
-            return services;
-        }
-
-        /// <summary>
-        ///     Adds a singleton behavior with an
-        ///     instance specified in <paramref name="implementationInstance" /> to the
-        ///     specified <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" />.
-        /// </summary>
-        /// <param name="services">
-        ///     The <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection" /> to add the
-        ///     service to.
-        /// </param>
-        /// <param name="implementationInstance"> The instance of the service. </param>
-        /// <returns>
-        ///     The <see cref="IServiceCollection" /> so that additional calls can be chained.
-        /// </returns>
-        public static IServiceCollection AddSingletonBehavior(
-            this IServiceCollection services,
-            IBehavior implementationInstance)
-        {
-            if (implementationInstance == null)
-                throw new ArgumentNullException(nameof(implementationInstance));
-
-            services.AddSingleton(typeof(IBehavior), implementationInstance);
-
-            return services;
-        }
     }
 }

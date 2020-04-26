@@ -6,7 +6,10 @@ using System.Collections.Generic;
 
 namespace Silverback.Messaging.Subscribers.Subscriptions
 {
-    public class DelegateSubscription : ISubscription
+    /// <summary>
+    ///     Represents a subscription initialized with a method delegate.
+    /// </summary>
+    internal class DelegateSubscription : ISubscription
     {
         private readonly SubscribedMethod _method;
 
