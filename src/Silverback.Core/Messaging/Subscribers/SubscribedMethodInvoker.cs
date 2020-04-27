@@ -14,15 +14,15 @@ namespace Silverback.Messaging.Subscribers
 {
     internal class SubscribedMethodInvoker
     {
-        private readonly ArgumentsResolver _argumentsResolver;
+        private readonly ArgumentsResolverService _argumentsResolver;
 
-        private readonly ReturnValueHandler _returnValueHandler;
+        private readonly ReturnValueHandlerService _returnValueHandler;
 
         private readonly IServiceProvider _serviceProvider;
 
         public SubscribedMethodInvoker(
-            ArgumentsResolver argumentsResolver,
-            ReturnValueHandler returnValueHandler,
+            ArgumentsResolverService argumentsResolver,
+            ReturnValueHandlerService returnValueHandler,
             IServiceProvider serviceProvider)
         {
             _argumentsResolver = argumentsResolver ?? throw new ArgumentNullException(nameof(argumentsResolver));

@@ -8,11 +8,14 @@ using System.Reflection;
 
 namespace Silverback.Messaging.Subscribers.ArgumentResolvers
 {
-    internal class ArgumentsResolver
+    /// <summary>
+    ///     Calls the registered <see cref="IArgumentResolver"/>'s.
+    /// </summary>
+    internal class ArgumentsResolverService
     {
         private readonly IEnumerable<IArgumentResolver> _argumentResolvers;
 
-        public ArgumentsResolver(IEnumerable<IArgumentResolver> argumentResolvers)
+        public ArgumentsResolverService(IEnumerable<IArgumentResolver> argumentResolvers)
         {
             // Revert the resolvers order, to give priority to the ones added after the
             // default ones.

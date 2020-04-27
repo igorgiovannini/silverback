@@ -35,8 +35,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 .AddScoped<IPublisher, Publisher>()
                 .AddScoped<SubscribedMethodInvoker>()
                 .AddScoped<SubscribedMethodsLoader>()
-                .AddScoped<ArgumentsResolver>()
-                .AddScoped<ReturnValueHandler>()
+                .AddScoped<ArgumentsResolverService>()
+                .AddScoped<ReturnValueHandlerService>()
 
                 // Note: resolvers and handlers will be evaluated in reverse order
                 .AddScoped<IArgumentResolver, ServiceProviderAdditionalArgumentResolver>()

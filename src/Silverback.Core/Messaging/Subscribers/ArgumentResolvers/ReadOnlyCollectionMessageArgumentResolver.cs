@@ -3,19 +3,31 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Silverback.Util;
 
 namespace Silverback.Messaging.Subscribers.ArgumentResolvers
 {
-    internal class ReadOnlyCollectionMessageArgumentResolver : IEnumerableMessageArgumentResolver
+    /// <summary>
+    ///     Resolves the parameters declared as <see cref="IReadOnlyCollection{T}" /> where
+    ///     <c> TMessage </c> is a type compatible with the type of the message being published.
+    /// </summary>
+    [SuppressMessage(
+        "ReSharper",
+        "CA1062",
+        Justification = "These methods are called by Silverback internals and don't need to check for null.")]
+    public class ReadOnlyCollectionMessageArgumentResolver : IEnumerableMessageArgumentResolver
     {
+        /// <inheritdoc />
         public bool CanResolve(Type parameterType) =>
             parameterType.IsGenericType &&
             parameterType.GetGenericTypeDefinition() == typeof(IReadOnlyCollection<>);
 
+        /// <inheritdoc />
         public Type GetMessageType(Type parameterType) =>
             parameterType.GetGenericArguments()[0];
 
+        /// <inheritdoc />
         public object GetValue(IReadOnlyCollection<object> messages, Type targetMessageType) =>
             messages.OfType(targetMessageType).ToList(targetMessageType);
     }

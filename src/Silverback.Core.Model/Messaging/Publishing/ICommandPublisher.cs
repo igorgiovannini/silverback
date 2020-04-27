@@ -7,6 +7,14 @@ using Silverback.Messaging.Messages;
 
 namespace Silverback.Messaging.Publishing
 {
+    /// <summary>
+    ///     <para>
+    ///         Publishes the messages implementing <see cref="ICommand" />.
+    ///     </para>
+    ///     <para>
+    ///         An <see cref="ICommand" /> is  can optionally return a value.
+    ///     </para>
+    /// </summary>
     public interface ICommandPublisher
     {
         void Execute(ICommand commandMessage);

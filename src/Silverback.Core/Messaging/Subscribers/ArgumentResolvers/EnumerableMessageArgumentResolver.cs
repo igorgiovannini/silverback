@@ -9,8 +9,8 @@ using Silverback.Util;
 namespace Silverback.Messaging.Subscribers.ArgumentResolvers
 {
     /// <summary>
-    ///     This implementation of <see cref="IEnumerableMessageArgumentResolver"/> can resolve parameters declared as
-    ///     <see cref="IEnumerable{TMessage}"/> where <c>TMessage</c> is the type of the message being published.
+    ///     Resolves the parameters declared as <see cref="IEnumerable{T}" /> where <c> TMessage </c> is
+    ///     a type compatible with the type of the message being published.
     /// </summary>
     [SuppressMessage(
         "ReSharper",

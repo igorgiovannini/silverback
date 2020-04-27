@@ -7,12 +7,15 @@ using System.Threading.Tasks;
 
 namespace Silverback.Messaging.Subscribers.ReturnValueHandlers
 {
+    /// <summary>
+    ///     Calls the registered <see cref="IReturnValueHandler"/>'s.
+    /// </summary>
     // TODO: Test
-    internal class ReturnValueHandler
+    internal class ReturnValueHandlerService
     {
         private readonly IReadOnlyCollection<IReturnValueHandler> _returnValueHandlers;
 
-        public ReturnValueHandler(IEnumerable<IReturnValueHandler> returnValueHandlers)
+        public ReturnValueHandlerService(IEnumerable<IReturnValueHandler> returnValueHandlers)
         {
             // Revert the handlers order, to give priority to the ones added after the
             // default ones.
